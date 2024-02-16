@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Header from '../../components/visitor/Header';
-import VisualShape from '../../components/visitor/Visual';
-import ControlBudget from '../../components/visitor/Control_budget';
-import Shape from '../../components/visitor/Shape';
-import Features from '../../components/visitor/Features';
-import Why from '../../components/visitor/Why';
-import Footer from '../../components/visitor/Footer';
+import Header from 'components/visitor/Header';
+import VisualShape from 'components/visitor/Visual';
+import ControlBudget from 'components/visitor/Control_budget';
+import Shape from 'components/visitor/Shape';
+import Features from 'components/visitor/Features';
+import Why from 'components/visitor/Why';
+import Footer from 'components/visitor/Footer';
 // import '../../assets/styles/Styles.css';
 import HomepageStyles from './styles';
 

@@ -1,29 +1,29 @@
 import styled from 'styled-components';
 
-import iPhoneImage from '../../assets/img/visitor/iPhone.png';
-import SamsungImage from '../../assets/img/visitor/samsung.png';
-import MacImage from '../../assets/img/visitor/macbook@2.a0225cde.png';
-import MobileImage from '../../assets/img/visitor/visual-mobil@2.51eeb89e.jpg';
-import AirplaneImage from '../../assets/img/visitor/airplane.svg';
-import AlertImage from '../../assets/img/visitor/alert.svg';
-import Bank from '../../assets/img/visitor/bank.svg';
-import BarImage from '../../assets/img/visitor/bar-chart.svg';
-import CashImage from '../../assets/img/visitor/cash.svg';
-import CircleImage from '../../assets/img/visitor/circle-green.svg';
-import CloudImage from '../../assets/img/visitor/cloud.svg';
-import CurrencyImage from '../../assets/img/visitor/currency.svg';
-import DashboardImage from '../../assets/img/visitor/dashboard.svg';
-import DownImage from '../../assets/img/visitor/down.svg';
-import FacebookImage from '../../assets/img/visitor/facebook.svg';
-import InstagramImage from '../../assets/img/visitor/instagram.svg';
-import KnifeImage from '../../assets/img/visitor/knife.svg';
-import LighteningImage from '../../assets/img/visitor/lightening.svg';
-import ModalImage from '../../assets/img/visitor/modal-bg.6ba7d9cc.svg';
-import PersonImage from '../../assets/img/visitor/person.svg';
-import PiechartImage from '../../assets/img/visitor/pie-chart.svg';
-import TwitterImage from '../../assets/img/visitor/twitter.svg';
-import UpImage from '../../assets/img/visitor/up.svg';
-import WalletImage from '../../assets/img/visitor/wallet.svg';
+import iPhoneImage from 'assets/img/visitor/iPhone.png';
+import SamsungImage from 'assets/img/visitor/samsung.png';
+import MacImage from 'assets/img/visitor/macbook@2.a0225cde.png';
+import MobileImage from 'assets/img/visitor/visual-mobil@2.51eeb89e.jpg';
+import AirplaneImage from 'assets/img/visitor/airplane.svg';
+import AlertImage from 'assets/img/visitor/alert.svg';
+import Bank from 'assets/img/visitor/bank.svg';
+import BarImage from 'assets/img/visitor/bar-chart.svg';
+import CashImage from 'assets/img/visitor/cash.svg';
+import CircleImage from 'assets/img/visitor/circle-green.svg';
+import CloudImage from 'assets/img/visitor/cloud.svg';
+import CurrencyImage from 'assets/img/visitor/currency.svg';
+import DashboardImage from 'assets/img/visitor/dashboard.svg';
+import DownImage from 'assets/img/visitor/down.svg';
+import FacebookImage from 'assets/img/visitor/facebook.svg';
+import InstagramImage from 'assets/img/visitor/instagram.svg';
+import KnifeImage from 'assets/img/visitor/knife.svg';
+import LighteningImage from 'assets/img/visitor/lightening.svg';
+import ModalImage from 'assets/img/visitor/modal-bg.6ba7d9cc.svg';
+import PersonImage from 'assets/img/visitor/person.svg';
+import PiechartImage from 'assets/img/visitor/pie-chart.svg';
+import TwitterImage from 'assets/img/visitor/twitter.svg';
+import UpImage from 'assets/img/visitor/up.svg';
+import WalletImage from 'assets/img/visitor/wallet.svg';
 
 const HomepageStyles = styled.div`
     *,
@@ -9434,7 +9434,7 @@ const HomepageStyles = styled.div`
         width: 1000px;
         height: 1000px;
         content: "";
-        background: url(../../assets/images/visitor/modal-bg.6ba7d9cc.svg) no-repeat;
+        background: url(assets/images/visitor/modal-bg.6ba7d9cc.svg) no-repeat;
         background-size: contain;
         background-position: 100%;
     }

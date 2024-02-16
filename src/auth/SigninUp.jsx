@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
-import AuthService from "../services/auth.service";
-import HomepageStyles from "../layouts/visitor/styles";
-import Header from "../components/visitor/Header";
-import Footer from "../components/visitor/Footer";
+import AuthService from "services/auth.service";
+import HomepageStyles from "layouts/visitor/styles";
+import Header from "components/visitor/Header";
+import Footer from "components/visitor/Footer";
 import {
   Alert,
   AlertIcon,

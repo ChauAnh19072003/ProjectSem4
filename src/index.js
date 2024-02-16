@@ -6,7 +6,7 @@ import UserLayout from 'layouts/user';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from 'theme/theme';
 import { ThemeEditorProvider } from '@hypertheme-editor/chakra-ui';
-import * as serviceWorker from "./serviceWorker";
+import * as serviceWorker from "serviceWorker";
 import Homepage from 'layouts/visitor/Homepage';
 import Login from 'auth/SigninUp';
 import AuthService from 'services/auth.service';

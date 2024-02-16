@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react'
-import HomepageStyles from "../layouts/visitor/styles";
-import Header from "../components/visitor/Header";
-import Footer from "../components/visitor/Footer";
+import HomepageStyles from "layouts/visitor/styles";
+import Header from "components/visitor/Header";
+import Footer from "components/visitor/Footer";
 import AuthService from 'services/auth.service';
 import {
   Alert,

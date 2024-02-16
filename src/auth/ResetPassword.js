@@ -1,8 +1,8 @@
 import React, {useState, useRef, useEffect } from 'react'
 import {useParams, useHistory} from 'react-router-dom'
-import HomepageStyles from "../layouts/visitor/styles";
-import Header from "../components/visitor/Header";
-import Footer from "../components/visitor/Footer";
+import HomepageStyles from "layouts/visitor/styles";
+import Header from "components/visitor/Header";
+import Footer from "components/visitor/Footer";
 import AuthService from 'services/auth.service';
 import {
   Alert,
