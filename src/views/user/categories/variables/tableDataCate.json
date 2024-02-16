@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "name": "Business",
+        "type": "income",
+        "iconName":"./assets/img/icons/business.png"
+    },
+    {
+        "id": 2,
+        "name": "Extra Income",
+        "type": "income",
+        "iconName": "/assets/img/icons/extraincome.png"
+    },
+    {
+        "id": 3,
+        "name": "Gifts",
+        "type": "expense",
+        "iconName":"/assets/img/icons/gift.png"
+    },
+    {
+        "id": 4,
+        "name": "Salary",
+        "type": "income",
+        "iconName": "/assets/img/icons/salary.png"
+    },
+    {
+        "id": 5,
+        "name": "Other",
+        "type": "income",
+        "iconName": "/assets/img/icons/other.png"
+    },
+    {
+        "id": 6,
+        "name": "Beauty",
+        "type": "expense",
+        "iconName": "/assets/img/icons/beauty.png"
+
+    },
+    {
+        "id": 7,
+        "name": "Food",
+        "type": "expense",
+        "iconName": "/assets/img/icons/food.png"
+
+    },
+    {
+        "id": 8,
+        "name": "Drink",
+        "type": "expense",
+        "iconName": "/assets/img/icons/drink.png"
+
+    },
+    {
+        "id": 9,
+        "name": "Bills",
+        "type": "expense",
+        "iconName": "/assets/img/icons/bill&fees.png"
+
+    },
+    {
+        "id": 10,
+        "name": "Shopping",
+        "type": "expense",
+        "iconName": "/assets/img/icons/shopping.png"
+
+    },
+    {
+        "id": 11,
+        "name": "Grocery",
+        "type": "expense",
+        "iconName": "/assets/img/icons/grocery.png"
+
+    },
+    {
+        "id": 12,
+        "name": "transport",
+        "type": "expense",
+        "iconName": "/assets/img/icons/transport.png"
+
+    }
+
+]

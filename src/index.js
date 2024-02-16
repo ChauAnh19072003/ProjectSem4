@@ -1,28 +1,47 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'assets/css/App.css';
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
-import AuthLayout from 'layouts/auth';
-import AdminLayout from 'layouts/admin';
-import RtlLayout from 'layouts/rtl';
+// import 'assets/css/App.css';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import UserLayout from 'layouts/user';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from 'theme/theme';
 import { ThemeEditorProvider } from '@hypertheme-editor/chakra-ui';
-
+import * as serviceWorker from "./serviceWorker";
+import Homepage from 'layouts/visitor/Homepage';
+import Login from 'auth/SigninUp';
+import AuthService from 'services/auth.service';
+import ForgotPassword from 'auth/ForgotPassword';
+import ResetPassword from 'auth/ResetPassword';
+// const PrivateRoute = ({ component: Component, ...rest }) => (
+// 	<Route
+// 	  {...rest}
+// 	  render={(props) =>
+// 		AuthService.isLoggedIn() ? (
+// 		  <Component {...props} />
+// 		) : (
+// 		  <Redirect to="/auth/signin" />
+// 		)
+// 	  }
+// 	/>
+//   );
 ReactDOM.render(
 	<ChakraProvider theme={theme}>
 		<React.StrictMode>
 			<ThemeEditorProvider>
-				<HashRouter>
+				<BrowserRouter>
 					<Switch>
-						<Route path={`/auth`} component={AuthLayout} />
-						<Route path={`/admin`} component={AdminLayout} />
-						<Route path={`/rtl`} component={RtlLayout} />
-						<Redirect from='/' to='/admin' />
+						<Route path="/visitor" component={Homepage} />
+						<Route path="/auth/signin" component={Login} />  {/* Signup and Signin */}
+						<Redirect exact from='/' to={AuthService.isLoggedIn() ? '/user' : '/visitor'} />
+						<Route path="/user" component={UserLayout} />
+						<Route path="/auth/forgot-password" component={ForgotPassword}/>
+						<Route path="/auth/reset-password/:token" component={ResetPassword} />
 					</Switch>
-				</HashRouter>
+				</BrowserRouter>
 			</ThemeEditorProvider>
 		</React.StrictMode>
 	</ChakraProvider>,
 	document.getElementById('root')
 );
+serviceWorker.unregister();
+

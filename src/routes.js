@@ -2,74 +2,76 @@ import React from "react";
 
 import { Icon } from "@chakra-ui/react";
 import {
-  MdBarChart,
-  MdPerson,
+  MdWallet,
   MdHome,
-  MdLock,
-  MdOutlineShoppingCart,
+  MdSettings
 } from "react-icons/md";
+import{
+  GrTransaction,
+  GrMoney
+} from "react-icons/gr";
+import { RiBillLine } from "react-icons/ri";
+import { TbPigMoney, TbCategory } from "react-icons/tb";
+import MainDashboard from "views/user/default";
+import Profile from "views/user/profile";
+import Wallet from "views/user/wallet";
+import Category from "views/user/categories"
 
-// Admin Imports
-import MainDashboard from "views/admin/default";
-import NFTMarketplace from "views/admin/marketplace";
-import Profile from "views/admin/profile";
-import DataTables from "views/admin/dataTables";
-import RTL from "views/admin/rtl";
-
-// Auth Imports
-import SignInCentered from "views/auth/signIn";
 
 const routes = [
   {
     name: "Main Dashboard",
-    layout: "/admin",
+    layout: "/user",
     path: "/default",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: MainDashboard,
   },
-  {
-    name: "NFT Marketplace",
-    layout: "/admin",
-    path: "/nft-marketplace",
-    icon: (
-      <Icon
-        as={MdOutlineShoppingCart}
-        width='20px'
-        height='20px'
-        color='inherit'
-      />
-    ),
-    component: NFTMarketplace,
-    secondary: true,
-  },
-  {
-    name: "Data Tables",
-    layout: "/admin",
-    icon: <Icon as={MdBarChart} width='20px' height='20px' color='inherit' />,
+   {
+    name: "Wallet",
+    layout: "/user",
+    icon: <Icon as={MdWallet} width='20px' height='20px' color='inherit' />,
     path: "/data-tables",
-    component: DataTables,
+    component: Wallet,
   },
   {
-    name: "Profile",
-    layout: "/admin",
-    path: "/profile",
-    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    name: "Transactions",
+    layout: "/user",
+    path:"/transactions",
+    icon: <Icon as ={GrTransaction} width='20px' height='20px' color='inherit'/>
+  },
+  {
+    name: "Budget",
+    layout: "/user",
+    path:"/budget",
+    icon: <Icon as ={GrMoney} width='20px' height='20px' color='inherit'/>
+  },
+  {
+    name: "Save",
+    layout: "/user",
+    path:"/save",
+    icon: <Icon as ={TbPigMoney} width='20px' height='20px' color='inherit'/>
+  },
+  {
+    name: "Categories",
+    layout: "/user",
+    path:"/categories",
+    icon: <Icon as ={TbCategory} width='20px' height='20px' color='inherit'/>,
+    component: Category,
+  },
+  {
+    name: "Bills",
+    layout: "/user",
+    path:"/bills",
+    icon: <Icon as ={RiBillLine} width='20px' height='20px' color='inherit'/>
+  },
+  {
+    name: "Setting",
+    layout: "/user",
+    path: "/setting",
+    icon: <Icon as={MdSettings} width='20px' height='20px' color='inherit' />,
     component: Profile,
   },
-  {
-    name: "Sign In",
-    layout: "/auth",
-    path: "/sign-in",
-    icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-    component: SignInCentered,
-  },
-  {
-    name: "RTL Admin",
-    layout: "/rtl",
-    path: "/rtl-default",
-    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-    component: RTL,
-  },
+
 ];
 
 export default routes;

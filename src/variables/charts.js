@@ -334,3 +334,92 @@ export const lineChartOptionsTotalSpent = {
   },
   color: ["#7551FF", "#39B8FF"],
 };
+
+
+export const balanceLineChartData = [
+  {
+    name: "Balance",
+    data: [1120, 2000, 3000, 6000, 3000, 1000],
+  },
+];
+
+
+export const balanceLineChart = {
+  chart: {
+    toolbar: {
+      show: false,
+    },
+    dropShadow: {
+      enabled: true,
+      top: 13,
+      left: 0,
+      blur: 10,
+      opacity: 0.1,
+      color: "#39B8FF",
+    },
+  },
+  markers: {
+    size: 0,
+    colors: "white",
+    strokeColors: "#7551FF",
+    strokeWidth: 3,
+    strokeOpacity: 0.9,
+    strokeDashArray: 0,
+    fillOpacity: 1,
+    discrete: [],
+    shape: "circle",
+    radius: 2,
+    offsetX: 0,
+    offsetY: 0,
+    showNullDataPoints: true,
+    type: 'horizontal',
+  },
+  tooltip: {
+    theme: "dark",
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    curve: "smooth",
+    type: "line",
+  },
+  fill: {
+    type: 'gradient',
+    gradient: {
+      shade: 'dark',
+      gradientToColors: [ '#FDD835'],
+      shadeIntensity: 1,
+      type: 'horizontal',
+      opacityFrom: 1,
+      opacityTo: 1,
+      stops: [0, 100, 100, 100]
+    },
+  },
+  xaxis: {
+    type: "numeric",
+    categories: ["SEP", "OCT", "NOV", "DEC", "JAN", "FEB"],
+    labels: {
+      style: {
+        colors: "#A3AED0",
+        fontSize: "12px",
+        fontWeight: "500",
+      },
+    },
+  },
+  yaxis: {
+    show: false,
+  },
+  // legend: {
+  //   show: false,
+  // },
+  // grid: {
+  //   show: false,
+  //   column: {
+  //     color: ["#7551FF", "#39B8FF"],
+  //     opacity: 0.5,
+  //   },
+  // },
+
+  color: ["#7551FF", "#39B8FF"],
+}
