@@ -61,7 +61,7 @@ const ResetPassword = () => {
         password: "Password must contain at least one uppercase letter, one lowercase letter, one digit, at least 8 characters long.",
       });
       setShowErrorAlert(true);
-    }
+    }else
 
     if (password !== confirmPassword) {
         setResetPasswordErrors({

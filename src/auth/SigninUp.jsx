@@ -113,7 +113,7 @@ const Login = () => {
         password: "Password must contain at least one uppercase letter, one lowercase letter, one digit, and be 8-10 characters long."
       });
       setShowErrorAlert(true);
-    }
+    }else
 
     if (password !== confirmPassword) {
       setRegisterValidationErrors({

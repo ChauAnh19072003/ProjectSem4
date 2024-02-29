@@ -40,8 +40,12 @@ const resetPassword = async (token, password) => {
   return response.data;
 }
 
-const logout = () => {
-  localStorage.removeItem("user");
+const logout = async () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (user && user.accessToken) {
+    await axios.post(API_URL + "logout");
+    localStorage.removeItem("user");
+  }
 };
 
 const getCurrentUser = () => {
