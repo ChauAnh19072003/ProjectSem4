@@ -115,7 +115,16 @@ const CategoryList = () => {
                         <p>{category.name}</p>
                       </Text>
                     </Flex>
-                    <Td>Delete | Update</Td>
+                    <Td>
+                      <Flex justifyContent='space-evenly'>
+                        <button>
+                          <span><img src={process.env.PUBLIC_URL +"/assets/img/icons/setting.svg"} alt="" /></span>
+                        </button>
+                        <button>
+                          <span><img src={process.env.PUBLIC_URL +"/assets/img/icons/delete.svg"} alt="" /></span>
+                        </button>
+                      </Flex>
+                    </Td>
                   </Tr>
                   
                 </Tbody>
