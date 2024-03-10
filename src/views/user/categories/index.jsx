@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AuthService from "services/auth.service";
+import IconSelect from "./IconSelect";
+import { SearchBar } from "components/navbar/searchBar/SearchBar";
 import axios from "axios";
 import {
   Box,
@@ -9,14 +11,34 @@ import {
   Table,
   Tbody,
   Td,
-  Th,
-  Thead,
   Tr,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Input,
+  useDisclosure,
+  Icon,
+  Select,
 } from "@chakra-ui/react";
+import { MdSettings, MdDelete } from "react-icons/md";
+import CategoryStyles from "views/user/categories/Styles";
 import Card from "components/card/Card";
+import DeleteConfirmationAlert from "./deleteAlert";
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [iconOptions, setIconOptions] = useState([]);
+  const [selectedIcon, setSelectedIcon] = useState([]);
+  const [newCategoryType, setNewCategoryType] = useState("EXPENSE");
+  const [isDeleteAlertOpen, setDeleteAlertOpen] = useState(false);
+  const [categoryIdToDelete, setCategoryIdToDelete] = useState(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -35,7 +57,21 @@ const CategoryList = () => {
 
     fetchCategories();
   }, []);
+  useEffect(() => {
+    const fetchIconOptions = async () => {
+      try {
+        const response = await axios.get("/api/categories/icons");
+        setIconOptions(response.data);
+        if (response.data.length > 0) {
+          setSelectedIcon(response.data[0]);
+        }
+      } catch (error) {
+        console.error("Error fetching icon options:", error);
+      }
+    };
 
+    fetchIconOptions();
+  }, []);
   const groupedCategories = categories.reduce((acc, category) => {
     const { type } = category;
     if (!acc[type]) {
@@ -45,95 +81,200 @@ const CategoryList = () => {
     return acc;
   }, {});
   const textColor = useColorModeValue("secondaryGray.900", "white");
+
+  const handleCreateCategory = async () => {
+    const currentUser = AuthService.getCurrentUser();
+    if (currentUser) {
+      try {
+        console.log("Creating category with selected icon:", selectedIcon);
+        const response = await axios.post("/api/categories/create", {
+          name: newCategoryName,
+          userId: currentUser.id,
+          icon: selectedIcon,
+          type: newCategoryType,
+        });
+        setCategories([...categories, response.data]);
+
+        onClose();
+      } catch (error) {
+        console.error("Error creating category:", error);
+      }
+    }
+  };
+  const handleDeleteCategory = async (categoryId) => {
+    try {
+      await axios.delete(`/api/categories/${categoryId}`);
+      const updatedCategories = categories.filter(
+        (category) => category.id !== categoryIdToDelete
+      );
+      setCategories(updatedCategories);
+      setDeleteAlertOpen(false);
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
+  };
+
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      <Card
-        direction="column"
-        w="70%"
-        px="150px"
-        mx="auto"
-        my="auto"
-        overflowX={{ sm: "scroll", lg: "hidden" }}
-      >
-        {Object.keys(groupedCategories).map((type) => (
-          <div key={type}>
-            <Text
-              color={textColor}
-              fontSize="22px"
-              fontWeight="700"
-              lineHeight="100%"
-              display="flex"
-              alignItems="flex-start"
+    <CategoryStyles>
+      <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+        <Card
+          direction="column"
+          w="70%"
+          px="150px"
+          mx="auto"
+          my="auto"
+          overflowX={{ sm: "scroll", lg: "hidden" }}
+        >
+          <Flex justifyContent="flex-start" my="20px">
+            <SearchBar w="70%" borderRadius="30px" />
+            <Box
+              as="button"
+              borderRadius="30px"
+              color="white"
+              fontWeight="bold"
+              w="20%"
+              bgGradient="linear(to-r, #2b71ad, green.500)"
+              _hover={{
+                bgGradient: "linear(to-r, #2b71ad, #422AFB)",
+              }}
+              onClick={onOpen}
+              mx="20px"
             >
-              {type === "EXPENSE" ? "Expense" : "Income"} categories
-            </Text>
-            {/* <ul>
-              {groupedCategories[type].map((category) => (
-                <li key={category.id} style={{ listStyle: "none" }}>
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    {category.icon && category.icon.path && (
-                      <img
-                        src={
-                          process.env.PUBLIC_URL +
-                          "/assets/img/icons/" +
-                          category.icon.path
-                        }
-                        alt={category.name + " Icon"}
-                        style={{
-                          width: "50px",
-                          height: "50px",
-                          marginRight: "10px",
-                        }}
-                      />
-                    )}
-                    <p>{category.name}</p>
-                  </div>
-                </li>
-              ))}
-            </ul> */}
-            <Table variant="simple" color="gray.500" mb="24px">
-              {groupedCategories[type].map((category) => (
-                <Tbody>
-                  <Tr key={category.id}>
-                    <Flex align="center">
-                      <Text color={textColor} display='flex' my='10px'>
-                        {category.icon && category.icon.path && (
-                          <img
-                            src={
-                              process.env.PUBLIC_URL +
-                              "/assets/img/icons/" +
-                              category.icon.path
-                            }
-                            alt={category.name + " Icon"}
-                            style={{
-                              width: "50px",
-                              height: "50px",
-                              marginRight: "10px",
+              Add
+            </Box>
+          </Flex>
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Create New Category</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <Input
+                  placeholder="Category Name"
+                  value={newCategoryName}
+                  onChange={(e) => setNewCategoryName(e.target.value)}
+                />
+                <Flex alignItems="center" my="20px">
+                  <IconSelect
+                    value={selectedIcon}
+                    onChange={(selectedOption) =>
+                      setSelectedIcon(selectedOption)
+                    }
+                    options={iconOptions}
+                  />
+                  <Text fontSize="lg" mx="10px" marginRight="2">
+                    Select Type:
+                  </Text>
+                  <Select
+                    value={newCategoryType}
+                    onChange={(e) => setNewCategoryType(e.target.value)}
+                    w="30%"
+                  >
+                    <option value="EXPENSE">Expense</option>
+                    <option value="INCOME">Income</option>
+                    <option value="DEBT">Debt</option>
+                  </Select>
+                </Flex>
+              </ModalBody>
+              <ModalFooter justifyContent="center">
+                <Button
+                  colorScheme="blue"
+                  mr={3}
+                  onClick={handleCreateCategory}
+                >
+                  Create
+                </Button>
+                <Button onClick={onClose}>Cancel</Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+
+          {Object.keys(groupedCategories).map((type) => (
+            <div key={type}>
+              <Text
+                color={textColor}
+                fontSize="22px"
+                fontWeight="700"
+                lineHeight="100%"
+                display="flex"
+                alignItems="flex-start"
+              >
+                {type === "EXPENSE"
+                  ? "Expense"
+                  : type === "DEBT"
+                  ? "Debt"
+                  : "Income"}{" "}
+                categories
+              </Text>
+              <Table variant="simple" color="gray.500" mb="24px">
+                {groupedCategories[type].map((category) => (
+                  <Tbody key={category.id}>
+                    <Tr>
+                      <Flex align="center">
+                        <Text color={textColor} display="flex" my="10px">
+                          {category.icon && category.icon.path && (
+                            <img
+                              src={`/assets/img/icons/${category.icon.path}`}
+                              alt={category.name + " Icon"}
+                              style={{
+                                width: "50px",
+                                height: "50px",
+                                marginRight: "10px",
+                              }}
+                            />
+                          )}
+                          <p>{category.name}</p>
+                        </Text>
+                      </Flex>
+                      <Td>
+                        <Flex justifyContent="space-evenly" alignItems="center">
+                          <Button className="setting" onClick={onOpen}>
+                            <span>
+                              <Icon
+                                as={MdSettings}
+                                w="20px"
+                                h="20px"
+                                color={textColor}
+                              />
+                            </span>
+                          </Button>
+                          <Button
+                            className="delete"
+                            onClick={() => {
+                              setCategoryIdToDelete(category.id);
+                              setDeleteAlertOpen(true);
+                            }}
+                          >
+                            <span className="deleteIcon">
+                              <Icon
+                                as={MdDelete}
+                                w="20px"
+                                h="20px"
+                                color={textColor}
+                              />
+                            </span>
+                          </Button>
+                          <DeleteConfirmationAlert
+                            isOpen={isDeleteAlertOpen}
+                            onClose={() => setDeleteAlertOpen(false)}
+                            onConfirm={() => {
+                              if (categoryIdToDelete) {
+                                handleDeleteCategory(categoryIdToDelete);
+                              }
+                              setDeleteAlertOpen(false);
                             }}
                           />
-                        )}
-                        <p>{category.name}</p>
-                      </Text>
-                    </Flex>
-                    <Td>
-                      <Flex justifyContent='space-evenly'>
-                        <button>
-                          <span><img src={process.env.PUBLIC_URL +"/assets/img/icons/setting.svg"} alt="" /></span>
-                        </button>
-                        <button>
-                          <span><img src={process.env.PUBLIC_URL +"/assets/img/icons/delete.svg"} alt="" /></span>
-                        </button>
-                      </Flex>
-                    </Td>
-                  </Tr>
-                  
-                </Tbody>
-              ))}
-            </Table>
-          </div>
-        ))}
-      </Card>
-    </Box>
+                        </Flex>
+                      </Td>
+                    </Tr>
+                  </Tbody>
+                ))}
+              </Table>
+            </div>
+          ))}
+        </Card>
+      </Box>
+    </CategoryStyles>
   );
 };
 
