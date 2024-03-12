@@ -9,14 +9,17 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  Slide,
+  Box,
 } from "@chakra-ui/react";
 
 const Login = () => {
   const history = useHistory();
+  const fadeDuration = 4;
   const [signupSuccess, setSignupSuccess] = useState("");
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [activePanel, setActivePanel] = useState("sign-in");
-
+  const [isCollapseOpen, setIsCollapseOpen] = useState(true);
   const switchToSignIn = () => {
     setActivePanel("sign-in");
   };
@@ -25,138 +28,138 @@ const Login = () => {
     setActivePanel("sign-up");
   };
 
+  useEffect(() => {
+    const isLoggedIn = AuthService.isLoggedIn();
+    if (isLoggedIn) {
+      history.push("/user/default");
+    }
+  }, []);
+
   //Login
 
   const form = useRef();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [loginValidationErrors, setLoginValidationErrors] = useState({
-    username: "",
-    password: "",
-  });
+  const [showErrors, setShowErrors] = useState({});
   const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
-    setShowErrorAlert(false);
-    setSignupSuccess(false);
   };
 
   const onChangePassword = (e) => {
     const password = e.target.value;
     setPassword(password);
-    setShowErrorAlert(false);
-    setSignupSuccess(false);
   };
 
   const onChangeEmail = (e) => {
     const email = e.target.value;
     setEmail(email);
-    setShowErrorAlert(false);
-    setSignupSuccess(false);
   };
+
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (!username || !password) {
-      setLoginValidationErrors({
-        username: !username ? "Username cannot be blank" : "",
-        password: !password ? "Password cannot be blank" : "",
-      });
-      setShowErrorAlert(true);
-      return;
-    }
     await AuthService.login(username, password)
       .then((response) => {
         console.log("Login successful:", response);
         history.push("/user/default");
       })
       .catch((error) => {
-        if (error.response && error.response.status === 401) {
-          setLoginValidationErrors({
-            username: "Invalid username or password",
+        if (
+          error.response &&
+          error.response.data &&
+          typeof error.response.data === "object"
+        ) {
+          setShowErrors(error.response.data);
+          setShowErrorAlert(true);
+        } else if (error.response && typeof error.response.data === "string") {
+          const fieldErrors = error.response.data.split("\n");
+          const formattedErrors = {};
+
+          fieldErrors.forEach((fieldError) => {
+            const [fieldName, errorMessage] = fieldError.split(": ");
+            formattedErrors[fieldName.toLowerCase()] = errorMessage;
           });
-        } else if (error.response.status === 403) {
-          setLoginValidationErrors({
-            username: "You need to verify your email to login",
+
+          setShowErrors(formattedErrors);
+        } else {
+          setShowErrors({
+            general: "An error occurred during login.",
           });
         }
         setShowErrorAlert(true);
+        setIsCollapseOpen(true);
+        setTimeout(() => {
+          setIsCollapseOpen(false);
+        }, fadeDuration * 800);
       });
   };
-  useEffect(() => {
-    const isLoggedIn = AuthService.isLoggedIn();
-  
-    if (isLoggedIn) {
-      history.push("/user/default");
-    }
-  }, []);
 
   //Register
-  const [registerValidationErrors, setRegisterValidationErrors] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
   const [confirmPassword, setConfirmPassword] = useState("");
   const onChangeConfirmPassword = (e) => {
-    const newConfirmPassword = e.target.value;
-    setConfirmPassword(newConfirmPassword);
-    setShowErrorAlert(false);
-    setSignupSuccess(false);
-  };
-
-  useEffect(() => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,10}$/;
-  
-    if (password && !passwordRegex.test(password)) {
-      setRegisterValidationErrors({
-        password: "Password must contain at least one uppercase letter, one lowercase letter, one digit, and be 8-10 characters long."
-      });
-      setShowErrorAlert(true);
-    }else
-
-    if (password !== confirmPassword) {
-      setRegisterValidationErrors({
-        confirmPassword: "Passwords do not match."
-      });
-      setShowErrorAlert(true);
-    }
-  }, [password, confirmPassword]);
-
+    const confirmPassword = e.target.value;
+    setConfirmPassword(confirmPassword);
+  }
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (!username || !email) {
-      setRegisterValidationErrors({
-        username: !username ? "Username cannot be blank" : "",
-        email: !email ? "Email cannot be blank" : "",
-        password: !password ? "Password cannot be blank" : "",
-      });
-      setShowErrorAlert(true);
-      return;
-    }
-
+  
     try {
-      await AuthService.register(username, email, password);
+      await AuthService.register(username, email, password, confirmPassword);
       setSignupSuccess(true);
-    } catch (error) {
-      console.log("Error object:", error);
-      if (error.response) {
-        const status = error.response.status;
-        console.log(error.response.status);
-        if (status === 403) {
-          setRegisterValidationErrors({
-            username: "Username or Email already exists",
-            password: !password ? "Password cannot be blank" : "",
-          });
-        }
+    }catch (error) {
+      if (
+        error.response &&
+        error.response.data &&
+        typeof error.response.data === "object"
+      ) {
+        setShowErrors(error.response.data);
+        setShowErrorAlert(true);
+      } else if (error.response && typeof error.response.data === "string") {
+        const fieldErrors = error.response.data.split("\n");
+        const formattedErrors = {};
+  
+        fieldErrors.forEach((fieldError) => {
+          const [fieldName, errorMessage] = fieldError.split(": ");
+          formattedErrors[fieldName.toLowerCase()] = errorMessage;
+        });
+  
+        setShowErrors(formattedErrors);
+        setShowErrorAlert(true);
+      } else {
+        setShowErrors({
+          general: "An error occurred during registration.",
+        });
+        setShowErrorAlert(true);
       }
-      setShowErrorAlert(true);
-    }
-  };
+  
+      setIsCollapseOpen(true);
+      setTimeout(() => {
+        setIsCollapseOpen(false);
+      }, fadeDuration * 800);
+    };
+  }
   return (
     <HomepageStyles>
-      <body className="body">
+      <body className="body" style={{ position: "relative" }}>
         <Header />
+        <Slide direction="top" in={isCollapseOpen} animateOpacity style={{position: "fixed", zIndex: "9999"}}>
+          {showErrorAlert && showErrors && (
+            <Box p="40px" mt="4" w="30%" margin="auto" padding="auto">
+              {Object.entries(showErrors).map(([field], index) => (
+                <Alert key={index} status="error" mt={4}>
+                  <AlertIcon />
+                  <AlertTitle>Error!</AlertTitle>
+                  <AlertDescription>
+                    {`${field.charAt(0).toUpperCase() + field.slice(1)} ${
+                      index < Object.entries(showErrors).length - 1 ? "\n" : ""
+                    }`}
+                  </AlertDescription>
+                </Alert>
+              ))}
+            </Box>
+          )}
+        </Slide>
         <div className="visual">
           <div className="visual__shape">
             <svg xmlns="http://www.w3.org/2000/svg" width="938" height="885">
@@ -201,22 +204,11 @@ const Login = () => {
         <div
           className={`container_login visual container ${
             activePanel === "sign-up" ? "right-panel-active" : ""
-          }`}
+          }` }
         >
           <div className="form-container sign-up-container">
             <form className="formLogin" onSubmit={handleRegister} ref={form}>
               <h2>Create Account</h2>
-              {showErrorAlert &&
-                Object.values(registerValidationErrors).map(
-                  (error, index) =>
-                    error && (
-                      <Alert key={index} status="error" mt={4}>
-                        <AlertIcon />
-                        <AlertTitle>Error!</AlertTitle>
-                        <AlertDescription>{error}</AlertDescription>
-                      </Alert>
-                    )
-                )}
               {signupSuccess && (
                 <Alert status="success" mt={4}>
                   <AlertIcon />
@@ -260,17 +252,6 @@ const Login = () => {
           <div className="form-container sign-in-container">
             <form className="formLogin" onSubmit={handleLogin} ref={form}>
               <h2>Sign in</h2>
-              {showErrorAlert &&
-                Object.values(loginValidationErrors).map(
-                  (error, index) =>
-                    error && (
-                      <Alert key={index} status="error" mt={4}>
-                        <AlertIcon />
-                        <AlertTitle>Error!</AlertTitle>
-                        <AlertDescription>{error}</AlertDescription>
-                      </Alert>
-                    )
-                )}
               <input
                 type="text"
                 placeholder="Username"
@@ -286,7 +267,9 @@ const Login = () => {
                 onChange={onChangePassword}
               />
               <button className="LoginBtn">Sign In</button>
-              <Link to="/auth/forgot-password" className="forgot-password-link">Forgot Password?</Link>
+              <Link to="/auth/forgot-password" className="forgot-password-link">
+                Forgot Password?
+              </Link>
             </form>
           </div>
           <div className="overlay-container">

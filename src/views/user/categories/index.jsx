@@ -113,6 +113,30 @@ const CategoryList = () => {
       console.error("Error deleting category:", error);
     }
   };
+  const handleUpdateCategory = async (categoryId) => {
+    const currentUser = AuthService.getCurrentUser();
+    if (currentUser) {
+      try {
+        console.log("Updating category with selected icon:", selectedIcon);
+        const response = await axios.put(`/api/categories/${categoryId}`, {
+          name: newCategoryName,
+          userId: currentUser.id,
+          icon: selectedIcon,
+          type: newCategoryType,
+        });
+  
+        // Update the categories array with the updated category
+        const updatedCategories = categories.map((category) =>
+          category.id === categoryId ? response.data : category
+        );
+  
+        setCategories(updatedCategories);
+        onClose();
+      } catch (error) {
+        console.error("Error updating category:", error);
+      }
+    }
+  };
 
   return (
     <CategoryStyles>
@@ -125,7 +149,7 @@ const CategoryList = () => {
           my="auto"
           overflowX={{ sm: "scroll", lg: "hidden" }}
         >
-          <Flex justifyContent="flex-start" my="20px">
+          <Flex justifyContent="flex-start" my="20px" direction={{ base: "column", md: "row" }}>
             <SearchBar w="70%" borderRadius="30px" />
             <Box
               as="button"
@@ -143,6 +167,9 @@ const CategoryList = () => {
               Add
             </Box>
           </Flex>
+
+
+          {/* CREATE */}
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
@@ -189,6 +216,54 @@ const CategoryList = () => {
             </ModalContent>
           </Modal>
 
+          {/* UPDATE */}
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Update Category</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <Input
+                  placeholder="Category Name"
+                  value={newCategoryName}
+                  onChange={(e) => setNewCategoryName(e.target.value)}
+                />
+                <Flex alignItems="center" my="20px">
+                  <IconSelect
+                    value={selectedIcon}
+                    onChange={(selectedOption) =>
+                      setSelectedIcon(selectedOption)
+                    }
+                    options={iconOptions}
+                  />
+                  <Text fontSize="lg" mx="10px" marginRight="2">
+                    Select Type:
+                  </Text>
+                  <Select
+                    value={newCategoryType}
+                    onChange={(e) => setNewCategoryType(e.target.value)}
+                    w="30%"
+                  >
+                    <option value="EXPENSE">Expense</option>
+                    <option value="INCOME">Income</option>
+                    <option value="DEBT">Debt</option>
+                  </Select>
+                </Flex>
+              </ModalBody>
+              <ModalFooter justifyContent="center">
+                <Button
+                  colorScheme="blue"
+                  mr={3}
+                  onClick={handleUpdateCategory}
+                >
+                  Update
+                </Button>
+                <Button onClick={onClose}>Cancel</Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+
+
           {Object.keys(groupedCategories).map((type) => (
             <div key={type}>
               <Text
@@ -210,7 +285,9 @@ const CategoryList = () => {
                 {groupedCategories[type].map((category) => (
                   <Tbody key={category.id}>
                     <Tr>
-                      <Flex align="center">
+                      <Flex align="center"
+                        direction={{ base: "column", md: "row" }}
+                      >
                         <Text color={textColor} display="flex" my="10px">
                           {category.icon && category.icon.path && (
                             <img

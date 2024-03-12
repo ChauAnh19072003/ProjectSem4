@@ -12753,6 +12753,16 @@ const HomepageStyles = styled.div`
         width: 768px;
         max-width: 100%;
         min-height: 480px;
+        margin: auto;
+        padding: auto;
+    }
+    .fade-down {
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
+    }
+      
+    .fade-down-hidden {
+        opacity: 0;
     }
 
     .form-container {

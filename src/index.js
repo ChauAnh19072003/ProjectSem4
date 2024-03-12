@@ -12,6 +12,7 @@ import Login from 'auth/SigninUp';
 import AuthService from 'services/auth.service';
 import ForgotPassword from 'auth/ForgotPassword';
 import ResetPassword from 'auth/ResetPassword';
+import UserProfile from 'views/user/profile'
 // const PrivateRoute = ({ component: Component, ...rest }) => (
 // 	<Route
 // 	  {...rest}
@@ -34,6 +35,7 @@ ReactDOM.render(
 						<Route path="/auth/signin" component={Login} />  {/* Signup and Signin */}
 						<Redirect exact from='/' to={AuthService.isLoggedIn() ? '/user' : '/visitor'} />
 						<Route path="/user" component={UserLayout} />
+						<Route path="/user/profile/:userId" component={UserProfile} />
 						<Route path="/auth/forgot-password" component={ForgotPassword}/>
 						<Route path="/auth/reset-password/:token" component={ResetPassword} />
 					</Switch>

@@ -4,7 +4,6 @@ import { Icon } from "@chakra-ui/react";
 import {
   MdWallet,
   MdHome,
-  MdSettings
 } from "react-icons/md";
 import{
   GrTransaction,
@@ -13,9 +12,9 @@ import{
 import { RiBillLine } from "react-icons/ri";
 import { TbPigMoney, TbCategory } from "react-icons/tb";
 import MainDashboard from "views/user/default";
-import Profile from "views/user/profile";
 import Wallet from "views/user/wallet";
 import Category from "views/user/categories"
+import UserProfile from "views/user/profile"
 
 
 const routes = [
@@ -64,14 +63,6 @@ const routes = [
     path:"/bills",
     icon: <Icon as ={RiBillLine} width='20px' height='20px' color='inherit'/>
   },
-  {
-    name: "Setting",
-    layout: "/user",
-    path: "/setting",
-    icon: <Icon as={MdSettings} width='20px' height='20px' color='inherit' />,
-    component: Profile,
-  },
-
 ];
 
 export default routes;
