@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
-import AuthService from "services/auth.service";
+import AuthService from "services/auth/auth.service";
 import HomepageStyles from "layouts/visitor/styles";
 import Header from "components/visitor/Header";
 import Footer from "components/visitor/Footer";
@@ -16,10 +16,13 @@ import {
 const Login = () => {
   const history = useHistory();
   const fadeDuration = 4;
-  const [signupSuccess, setSignupSuccess] = useState("");
+  const [signupSuccessAlert, setSignupSuccessAlert] = useState(false);
+  const [signupSuccessMessage, setSignupSuccessMessage] = useState({});
+  const [showErrors, setShowErrors] = useState({});
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [activePanel, setActivePanel] = useState("sign-in");
   const [isCollapseOpen, setIsCollapseOpen] = useState(true);
+  const [isSuccessOpen, setIsSuccessOpen] = useState(true);
   const switchToSignIn = () => {
     setActivePanel("sign-in");
   };
@@ -41,7 +44,6 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [showErrors, setShowErrors] = useState({});
   const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
@@ -74,20 +76,10 @@ const Login = () => {
           setShowErrorAlert(true);
         } else if (error.response && typeof error.response.data === "string") {
           const fieldErrors = error.response.data.split("\n");
-          const formattedErrors = {};
 
-          fieldErrors.forEach((fieldError) => {
-            const [fieldName, errorMessage] = fieldError.split(": ");
-            formattedErrors[fieldName.toLowerCase()] = errorMessage;
-          });
-
-          setShowErrors(formattedErrors);
-        } else {
-          setShowErrors({
-            general: "An error occurred during login.",
-          });
+          setShowErrors(fieldErrors);
+          setShowErrorAlert(true);
         }
-        setShowErrorAlert(true);
         setIsCollapseOpen(true);
         setTimeout(() => {
           setIsCollapseOpen(false);
@@ -100,14 +92,36 @@ const Login = () => {
   const onChangeConfirmPassword = (e) => {
     const confirmPassword = e.target.value;
     setConfirmPassword(confirmPassword);
-  }
+  };
   const handleRegister = async (e) => {
     e.preventDefault();
-  
+
     try {
-      await AuthService.register(username, email, password, confirmPassword);
-      setSignupSuccess(true);
-    }catch (error) {
+      const response = await AuthService.register(
+        username,
+        email,
+        password,
+        confirmPassword
+      );
+      if (response && response.status === 200) {
+        if (response && response.data && typeof response.data === "object") {
+          setSignupSuccessMessage(response.data);
+          setSignupSuccessAlert(true);
+        } else if (
+          response &&
+          response.data &&
+          typeof response.data === "string"
+        ) {
+          const fieldSuccess = response.data.split("\n");
+          setSignupSuccessMessage(fieldSuccess);
+          setSignupSuccessAlert(true);
+        }
+      }
+      setIsSuccessOpen(true);
+      setTimeout(() => {
+        setIsSuccessOpen(false);
+      }, fadeDuration * 1000);
+    } catch (error) {
       if (
         error.response &&
         error.response.data &&
@@ -117,48 +131,58 @@ const Login = () => {
         setShowErrorAlert(true);
       } else if (error.response && typeof error.response.data === "string") {
         const fieldErrors = error.response.data.split("\n");
-        const formattedErrors = {};
-  
-        fieldErrors.forEach((fieldError) => {
-          const [fieldName, errorMessage] = fieldError.split(": ");
-          formattedErrors[fieldName.toLowerCase()] = errorMessage;
-        });
-  
-        setShowErrors(formattedErrors);
-        setShowErrorAlert(true);
-      } else {
-        setShowErrors({
-          general: "An error occurred during registration.",
-        });
+        setShowErrors(fieldErrors);
         setShowErrorAlert(true);
       }
-  
+      setSignupSuccessAlert(false);
       setIsCollapseOpen(true);
       setTimeout(() => {
         setIsCollapseOpen(false);
       }, fadeDuration * 800);
-    };
-  }
+    }
+  };
   return (
     <HomepageStyles>
       <body className="body" style={{ position: "relative" }}>
         <Header />
-        <Slide direction="top" in={isCollapseOpen} animateOpacity style={{position: "fixed", zIndex: "9999"}}>
-          {showErrorAlert && showErrors && (
+        <Slide
+          direction="top"
+          in={isCollapseOpen}
+          animateOpacity
+          style={{ position: "fixed", zIndex: "9999" }}
+        >
+          {showErrorAlert && Object.keys(showErrors).length > 0 && (
             <Box p="40px" mt="4" w="30%" margin="auto" padding="auto">
-              {Object.entries(showErrors).map(([field], index) => (
-                <Alert key={index} status="error" mt={4}>
+              {Object.entries(showErrors).map(([field, errorMessage]) => (
+                <Alert key={field} status="error" mt={4}>
                   <AlertIcon />
                   <AlertTitle>Error!</AlertTitle>
-                  <AlertDescription>
-                    {`${field.charAt(0).toUpperCase() + field.slice(1)} ${
-                      index < Object.entries(showErrors).length - 1 ? "\n" : ""
-                    }`}
-                  </AlertDescription>
+                  <AlertDescription>{errorMessage}</AlertDescription>
                 </Alert>
               ))}
             </Box>
           )}
+        </Slide>
+        <Slide
+          direction="top"
+          in={isSuccessOpen}
+          animateOpacity
+          style={{ position: "fixed", zIndex: "9999" }}
+        >
+          {signupSuccessAlert &&
+            Object.keys(signupSuccessMessage).length > 0 && (
+              <Box p="40px" mt="4" w="30%" margin="auto" padding="auto">
+                {Object.entries(signupSuccessMessage).map(
+                  ([field, successMessage]) => (
+                    <Alert key={field} status="success" mt={4}>
+                      <AlertIcon />
+                      <AlertTitle>Sign up successful!</AlertTitle>
+                      <AlertDescription>{successMessage}</AlertDescription>
+                    </Alert>
+                  )
+                )}
+              </Box>
+            )}
         </Slide>
         <div className="visual">
           <div className="visual__shape">
@@ -204,20 +228,11 @@ const Login = () => {
         <div
           className={`container_login visual container ${
             activePanel === "sign-up" ? "right-panel-active" : ""
-          }` }
+          }`}
         >
           <div className="form-container sign-up-container">
             <form className="formLogin" onSubmit={handleRegister} ref={form}>
               <h2>Create Account</h2>
-              {signupSuccess && (
-                <Alert status="success" mt={4}>
-                  <AlertIcon />
-                  <AlertTitle>Sign up successful!</AlertTitle>
-                  <AlertDescription>
-                    Please check your email to verify your account.
-                  </AlertDescription>
-                </Alert>
-              )}
               <input
                 type="text"
                 placeholder="Username"

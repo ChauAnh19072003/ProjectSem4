@@ -18,7 +18,7 @@ import { FaEthereum } from "react-icons/fa";
 import routes from "routes.js";
 import { ThemeEditor } from "./ThemeEditor";
 import { useHistory, Link } from "react-router-dom";
-import AuthService from "services/auth.service";
+import AuthService from "services/auth/auth.service";
 // import AuthVerify from 'components/navbar/AuthVerify'
 export default function HeaderLinks(props) {
   const { secondary } = props;

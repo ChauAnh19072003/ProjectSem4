@@ -9,7 +9,7 @@ import { ThemeEditorProvider } from '@hypertheme-editor/chakra-ui';
 import * as serviceWorker from "serviceWorker";
 import Homepage from 'layouts/visitor/Homepage';
 import Login from 'auth/SigninUp';
-import AuthService from 'services/auth.service';
+import AuthService from 'services/auth/auth.service';
 import ForgotPassword from 'auth/ForgotPassword';
 import ResetPassword from 'auth/ResetPassword';
 import UserProfile from 'views/user/profile'
