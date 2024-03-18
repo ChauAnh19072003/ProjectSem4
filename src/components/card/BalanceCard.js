@@ -27,7 +27,7 @@ export default function BalanceCard(props) {
           <Text fontSize='2xl' fontWeight='bold'>
             Total Balance
           </Text>
-          <Box  as='Availabled' fontSize='10px'fontWeight='bold' align='center' padding='8px' color='white' bg='#190793' borderRadius='20px'>Availabled</Box>
+          <Box fontSize='10px'fontWeight='bold' align='center' padding='8px' color='white' bg='#190793' borderRadius='20px'>Availabled</Box>
         </Flex>
         <Divider/>
         <Spacer mb='20px'/>

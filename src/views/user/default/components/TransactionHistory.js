@@ -37,7 +37,7 @@ const TransactionHistory = (props) => {
         <Box textAlign="center">
           <Button
             bg={bgButton}
-            _hover={bgHover}
+            _hover={{bgHover}}
             _focus={bgFocus}
             _active={bgFocus}
             w="45px"
@@ -65,7 +65,7 @@ const TransactionHistory = (props) => {
         <Box textAlign="center">
           <Button
             bg={bgButton}
-            _hover={bgHover}
+            _hover={{bgHover}}
             _focus={bgFocus}
             _active={bgFocus}
             w="45px"
@@ -93,7 +93,7 @@ const TransactionHistory = (props) => {
         <Box textAlign="center">
           <Button
             bg={bgButton}
-            _hover={bgHover}
+            _hover={{bgHover}}
             _focus={bgFocus}
             _active={bgFocus}
             w="45px"

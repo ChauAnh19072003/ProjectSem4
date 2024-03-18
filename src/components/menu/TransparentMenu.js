@@ -60,7 +60,7 @@ export default function Banner(props) {
         <MenuItem
           transition='0.2s linear'
           color={textColor}
-          _hover={textHover}
+          _hover={{textHover}}
           p='0px'
           borderRadius='8px'
           _active={{
@@ -82,7 +82,7 @@ export default function Banner(props) {
           p='0px'
           borderRadius='8px'
           color={textColor}
-          _hover={textHover}
+          _hover={{textHover}}
           _active={{
             bg: "transparent",
           }}
@@ -120,7 +120,7 @@ export default function Banner(props) {
         <MenuItem
           transition='0.2s linear'
           color={textColor}
-          _hover={textHover}
+          _hover={{textHover}}
           p='0px'
           borderRadius='8px'
           _active={{

@@ -47,7 +47,7 @@ export default function WeeklyRevenue(props) {
           align='center'
           justifyContent='center'
           bg={bgButton}
-          _hover={bgHover}
+          _hover={{bgHover}}
           _focus={bgFocus}
           _active={bgFocus}
           w='37px'

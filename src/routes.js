@@ -14,10 +14,11 @@ import { TbPigMoney, TbCategory } from "react-icons/tb";
 import MainDashboard from "views/user/default";
 import Wallet from "views/user/wallet";
 import Category from "views/user/categories"
+import Bill from  "views/user/bill"
 import UserProfile from "views/user/profile"
 
 
-const routes = [
+const Routes = [
   {
     name: "Main Dashboard",
     layout: "/user",
@@ -61,8 +62,9 @@ const routes = [
     name: "Bills",
     layout: "/user",
     path:"/bills",
-    icon: <Icon as ={RiBillLine} width='20px' height='20px' color='inherit'/>
+    icon: <Icon as ={RiBillLine} width='20px' height='20px' color='inherit'/>,
+    component: Bill,
   },
 ];
 
-export default routes;
+export default Routes;

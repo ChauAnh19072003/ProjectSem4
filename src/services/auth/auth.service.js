@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const API_URL = "http://localhost:8080/api/auth/";
 
 const register = (username, email, password, confirmPassword) => {
@@ -57,7 +56,6 @@ const isLoggedIn = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   return user && user.accessToken;
 };
-
 const AuthService = {
   register,
   login,
@@ -65,7 +63,9 @@ const AuthService = {
   getCurrentUser,
   isLoggedIn,
   forgotPassword,
-  resetPassword
+  resetPassword,
 }
 
 export default AuthService;
+
+

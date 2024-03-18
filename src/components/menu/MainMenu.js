@@ -58,7 +58,7 @@ export default function Banner(props) {
         align='center'
         justifyContent='center'
         bg={bgButton}
-        _hover={bgHover}
+        _hover={{bgHover}}
         _focus={bgFocus}
         _active={bgFocus}
         w='37px'
@@ -82,7 +82,7 @@ export default function Banner(props) {
         <MenuItem
           transition='0.2s linear'
           color={textColor}
-          _hover={textHover}
+          _hover={{textHover}}
           p='0px'
           borderRadius='8px'
           _active={{
@@ -104,7 +104,7 @@ export default function Banner(props) {
           p='0px'
           borderRadius='8px'
           color={textColor}
-          _hover={textHover}
+          _hover={{textHover}}
           _active={{
             bg: "transparent",
           }}
@@ -124,7 +124,7 @@ export default function Banner(props) {
           p='0px'
           borderRadius='8px'
           color={textColor}
-          _hover={textHover}
+          _hover={{textHover}}
           _active={{
             bg: "transparent",
           }}
@@ -142,7 +142,7 @@ export default function Banner(props) {
         <MenuItem
           transition='0.2s linear'
           color={textColor}
-          _hover={textHover}
+          _hover={{textHover}}
           p='0px'
           borderRadius='8px'
           _active={{
