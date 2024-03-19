@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import AuthService from "services/auth/auth.service";
 import HomepageStyles from "layouts/visitor/styles";
+import AuthStyles from "./AuthStyles";
 import Header from "components/visitor/Header";
 import Footer from "components/visitor/Footer";
 import {
@@ -12,7 +13,7 @@ import {
   Slide,
   Box,
 } from "@chakra-ui/react";
-
+import Card from "components/card/Card";
 const Login = () => {
   const history = useHistory();
   const fadeDuration = 4;
@@ -23,6 +24,11 @@ const Login = () => {
   const [activePanel, setActivePanel] = useState("sign-in");
   const [isCollapseOpen, setIsCollapseOpen] = useState(true);
   const [isSuccessOpen, setIsSuccessOpen] = useState(true);
+  const [isSignUpMode, setIsSignUpMode] = useState(false);
+
+  const toggleMode = () => {
+    setIsSignUpMode(!isSignUpMode);
+  };
   const switchToSignIn = () => {
     setActivePanel("sign-in");
   };
@@ -143,179 +149,158 @@ const Login = () => {
   };
   return (
     <HomepageStyles>
-      <body className="body" style={{ position: "relative" }}>
-        <Header />
-        <Slide
-          direction="top"
-          in={isCollapseOpen}
-          animateOpacity
-          style={{ position: "fixed", zIndex: "9999" }}
-        >
-          {showErrorAlert && Object.keys(showErrors).length > 0 && (
-            <Box p="40px" mt="4" w="30%" margin="auto" padding="auto">
-              {Object.entries(showErrors).map(([field, errorMessage]) => (
-                <Alert key={field} status="error" mt={4}>
+      <Header />
+      <Slide
+        direction="top"
+        in={isCollapseOpen}
+        animateOpacity
+        style={{ position: "fixed", zIndex: "9999" }}
+      >
+        {showErrorAlert && Object.keys(showErrors).length > 0 && (
+          <Box p="40px" mt="4" w="30%" margin="auto" padding="auto">
+            {Object.entries(showErrors).map(([field, errorMessage]) => (
+              <Alert key={field} status="error" mt={4}>
+                <AlertIcon />
+                <AlertTitle>Error!</AlertTitle>
+                <AlertDescription>{errorMessage}</AlertDescription>
+              </Alert>
+            ))}
+          </Box>
+        )}
+      </Slide>
+      <Slide
+        direction="top"
+        in={isSuccessOpen}
+        animateOpacity
+        style={{ position: "fixed", zIndex: "9999" }}
+      >
+        {signupSuccessAlert && Object.keys(signupSuccessMessage).length > 0 && (
+          <Box p="40px" mt="4" w="30%" margin="auto" padding="auto">
+            {Object.entries(signupSuccessMessage).map(
+              ([field, successMessage]) => (
+                <Alert key={field} status="success" mt={4}>
                   <AlertIcon />
-                  <AlertTitle>Error!</AlertTitle>
-                  <AlertDescription>{errorMessage}</AlertDescription>
+                  <AlertTitle>Sign up successful!</AlertTitle>
+                  <AlertDescription>{successMessage}</AlertDescription>
                 </Alert>
-              ))}
-            </Box>
-          )}
-        </Slide>
-        <Slide
-          direction="top"
-          in={isSuccessOpen}
-          animateOpacity
-          style={{ position: "fixed", zIndex: "9999" }}
-        >
-          {signupSuccessAlert &&
-            Object.keys(signupSuccessMessage).length > 0 && (
-              <Box p="40px" mt="4" w="30%" margin="auto" padding="auto">
-                {Object.entries(signupSuccessMessage).map(
-                  ([field, successMessage]) => (
-                    <Alert key={field} status="success" mt={4}>
-                      <AlertIcon />
-                      <AlertTitle>Sign up successful!</AlertTitle>
-                      <AlertDescription>{successMessage}</AlertDescription>
-                    </Alert>
-                  )
-                )}
-              </Box>
+              )
             )}
-        </Slide>
-        <div className="visual">
-          <div className="visual__shape">
-            <svg xmlns="http://www.w3.org/2000/svg" width="938" height="885">
-              <defs>
-                <linearGradient
-                  id="a"
-                  x1="40.909%"
-                  x2="25.957%"
-                  y1=".755%"
-                  y2="91.712%"
+          </Box>
+        )}
+      </Slide>
+      <div className="visual">
+      </div>
+      <AuthStyles>
+        <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
+          <div className="forms-container">
+            <div className="signin-signup">
+              <form
+                className="sign-up-form"
+                onSubmit={handleRegister}
+                ref={form}
+              >
+                <h2 className="title">Create Account</h2>
+                <div className="input-field">
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    name="username"
+                    value={username}
+                    onChange={onChangeUsername}
+                  />
+                </div>
+                <div className="input-field">
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    name="email"
+                    value={email}
+                    onChange={onChangeEmail}
+                  />
+                </div>
+                <div className="input-field">
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    value={password}
+                    onChange={onChangePassword}
+                  />
+                </div>
+                <div className="input-field">
+                  <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    name="confirmPassword"
+                    value={confirmPassword}
+                    onChange={onChangeConfirmPassword}
+                  />
+                </div>
+                <button className="btn">Sign Up</button>
+              </form>
+              <form className="sign-in-form" onSubmit={handleLogin} ref={form}>
+                <h2 className="title">Sign in</h2>
+                <div className="input-field">
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    name="username"
+                    value={username}
+                    onChange={onChangeUsername}
+                  />
+                </div>
+                <div className="input-field">
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    value={password}
+                    onChange={onChangePassword}
+                  />
+                </div>
+                <button className="btn solid">Sign In</button>
+                <Link
+                  to="/auth/forgot-password"
+                  className="forgot-password-link"
                 >
-                  <stop offset="0%" stopColor="#12C48B" />
-                  <stop offset="100%" stopColor="#FFF" />
-                </linearGradient>
-                <linearGradient
-                  id="b"
-                  x1="31.928%"
-                  x2="49.518%"
-                  y1="35.898%"
-                  y2="98.292%"
-                >
-                  <stop offset="0%" stopColor="#2b71ad" />
-                  <stop offset="100%" stopColor="#422AFB" />
-                </linearGradient>
-              </defs>
-              <g fill="none" fillRule="evenodd">
-                <circle
-                  cx="440"
-                  cy="445"
-                  r="439.5"
-                  stroke="url(#a)"
-                  opacity=".24"
-                />
-                <path
-                  fill="url(#b)"
-                  d="M498 880C254.995 880 58 683.005 58 440S254.995 0 498 0s440 196.995 440 440-196.995 440-440 440zm0-317c67.931 0 123-55.069 123-123s-55.069-123-123-123-123 55.069-123 123 55.069 123 123 123z"
-                />
-              </g>
-            </svg>
+                  Forgot Password?
+                </Link>
+              </form>
+            </div>
           </div>
-        </div>
-        <div
-          className={`container_login visual container ${
-            activePanel === "sign-up" ? "right-panel-active" : ""
-          }`}
-        >
-          <div className="form-container sign-up-container">
-            <form className="formLogin" onSubmit={handleRegister} ref={form}>
-              <h2>Create Account</h2>
-              <input
-                type="text"
-                placeholder="Username"
-                name="username"
-                value={username}
-                onChange={onChangeUsername}
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={email}
-                onChange={onChangeEmail}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={password}
-                onChange={onChangePassword}
-              />
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                name="confirmPassword"
-                value={confirmPassword}
-                onChange={onChangeConfirmPassword}
-              />
-              <button className="LoginBtn">Sign Up</button>
-            </form>
-          </div>
-          <div className="form-container sign-in-container">
-            <form className="formLogin" onSubmit={handleLogin} ref={form}>
-              <h2>Sign in</h2>
-              <input
-                type="text"
-                placeholder="Username"
-                name="username"
-                value={username}
-                onChange={onChangeUsername}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={password}
-                onChange={onChangePassword}
-              />
-              <button className="LoginBtn">Sign In</button>
-              <Link to="/auth/forgot-password" className="forgot-password-link">
-                Forgot Password?
-              </Link>
-            </form>
-          </div>
-          <div className="overlay-container">
-            <div
-              className={`overlay-login ${
-                activePanel === "sign-up" ? "right-panel-active" : ""
-              }`}
-            >
-              <div className="overlay-panel-login overlay-left-login">
-                <h1>Welcome Back!</h1>
+          <div className="panels-container">
+            <div className="panel left-panel">
+              <div className="content">
+                <h3>New here ?</h3>
                 <p>
-                  To keep connected with us please login with your personal info
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Debitis, ex ratione. Aliquid!
                 </p>
-                <button className="ghost" id="signIn" onClick={switchToSignIn}>
-                  Sign In
+                <button className="btn transparent" onClick={toggleMode}>
+                  Sign up
                 </button>
               </div>
-              <div className="overlay-panel-login overlay-right-login">
-                <h1>Hello, Friend!</h1>
-                <p>Enter your personal details and start journey with us</p>
-                <button className="ghost" id="signUp" onClick={switchToSignUp}>
-                  Sign Up
+              <img src="img/log.svg" className="image" alt="" />
+            </div>
+            <div className="panel right-panel">
+              <div className="content">
+                <h3>One of us ?</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nostrum laboriosam ad deleniti.
+                </p>
+                <button className="btn transparent" onClick={toggleMode}>
+                  Sign in
                 </button>
               </div>
+              <img src="img/register.svg" className="image" alt="" />
             </div>
           </div>
         </div>
-        <div className="footer">
-          <Footer />
-        </div>
-      </body>
+      </AuthStyles>
+      <div className="footer">
+        <Footer />
+      </div>
     </HomepageStyles>
   );
 };

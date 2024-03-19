@@ -52,7 +52,7 @@ const HomepageStyles = styled.div`
     section {
     display: block;
     }
-    body {
+    .page {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
         Helvetica Neue, Arial, sans-serif;
@@ -3836,7 +3836,7 @@ const HomepageStyles = styled.div`
     @-ms-viewport {
     width: device-width;
     }
-    body,
+    .page,
     html {
     font-size: 16px;
     font-family: Open Sans, sans-serif;
@@ -3846,14 +3846,14 @@ const HomepageStyles = styled.div`
     background: linear-gradient(180deg, #fff 0, #fff 70%, #f9fbfc);
     overflow-x: hidden;
     }
-    body.mobileDevice,
+    .page.mobileDevice,
     html.mobileDevice {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
     }
-    body.is-overflow,
+    .page.is-overflow,
     html.is-overflow {
     position: fixed;
     left: 0;
@@ -5385,22 +5385,22 @@ const HomepageStyles = styled.div`
     margin-right: 10px;
     }
     .store__button--apple #hover {
-    transition: fill-opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: fillOpacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
     .store__button--apple:hover #hover {
-    fill-opacity: 1;
+    fillOpacity: 1;
     }
     .store__button--google #hover {
-    transition: fill-opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: fillOpacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
     .store__button--google:hover #hover {
-    fill-opacity: 1;
+    fillOpacity: 1;
     }
     .store__button--website #hover {
-    transition: fill-opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: fillOpacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
     .store__button--website:hover #hover {
-    fill-opacity: 1;
+    fillOpacity: 1;
     }
     .store-social {
     margin-top: 30px;
@@ -5602,7 +5602,7 @@ const HomepageStyles = styled.div`
     font-size: 38px;
     text-shadow: 1px 1px 10px rgba(18, 196, 139, 0.2);
     }
-    .card__head-icon + .card__body {
+    .card__head-icon + .card__.page {
     margin-top: 30px;
     }
     .card__head-icon--center {
@@ -5632,12 +5632,12 @@ const HomepageStyles = styled.div`
     font-size: 20px;
     font-size: 1.25rem;
     }
-    .card__body p,
+    .card__.page p,
     .card__title {
     line-height: 32px;
     line-height: 2rem;
     }
-    .card__body p {
+    .card__.page p {
     color: #6c767f;
     font-size: 16px;
     font-size: 1rem;
@@ -5916,7 +5916,7 @@ const HomepageStyles = styled.div`
     .card-premium .card__title + .button {
     margin-top: 24px;
     }
-    .card-premium .card__body p {
+    .card-premium .card__.page p {
     margin: 15px 0 30px;
     font-weight: 300;
     line-height: 1.875em;
@@ -5938,12 +5938,12 @@ const HomepageStyles = styled.div`
     .card-plain .card__title {
     font-weight: 600;
     }
-    .card-plain .card__body,
+    .card-plain .card__.page,
     .card-plain .card__title {
     font-size: 32px;
     line-height: 1.3125em;
     }
-    .card-plain .card__body p {
+    .card-plain .card__.page p {
     margin-top: 15px;
     margin-bottom: 0;
     color: #6c767f;
@@ -6146,7 +6146,7 @@ const HomepageStyles = styled.div`
     font-weight: 600;
     margin-top: 15px;
     }
-    .card-plan .card__body p {
+    .card-plan .card__.page p {
     font-size: 14px;
     font-weight: 600;
     color: #6c767f;
@@ -6230,10 +6230,10 @@ const HomepageStyles = styled.div`
     line-height: 2rem;
     margin-bottom: 48px;
     }
-    .card-reason .card__body p {
+    .card-reason .card__.page p {
     font-size: 16px;
     }
-    .card-reason .card__body a {
+    .card-reason .card__.page a {
     font-size: inherit;
     color: #6c767f;
     text-decoration: underline;
@@ -6335,7 +6335,7 @@ const HomepageStyles = styled.div`
     align-items: center;
     padding-bottom: 0;
     }
-    .card-balance .card__body,
+    .card-balance .card__.page,
     .card-balance .card__head {
     position: static;
     -ms-flex-align: center;
@@ -6352,17 +6352,17 @@ const HomepageStyles = styled.div`
     color: #fff;
     font-size: 18px;
     }
-    .card-balance .card__body {
+    .card-balance .card__.page {
     margin-top: 0;
     line-height: 1;
     }
-    .card-balance .card__body p {
+    .card-balance .card__.page p {
     display: block;
     color: #344554;
     font-weight: 600;
     margin-bottom: 0;
     }
-    .card-balance .card__body span {
+    .card-balance .card__.page span {
     color: #6c767f;
     }
     .card-balance__status {
@@ -6383,10 +6383,10 @@ const HomepageStyles = styled.div`
     transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1) 0.8s,
         top 0.2s cubic-bezier(0.215, 0.61, 0.355, 1) 0.8s;
     }
-    .card-balance__status--down .card__body .icon {
+    .card-balance__status--down .card__.page .icon {
     background-color: #fb6666;
     }
-    .card-balance__status .card__body,
+    .card-balance__status .card__.page,
     .card-balance__status .icon {
     display: -ms-flexbox;
     display: flex;
@@ -6428,7 +6428,7 @@ const HomepageStyles = styled.div`
     top: 100%;
     }
     @media (min-width: 576px) {
-    .card-premium .card__body p {
+    .card-premium .card__.page p {
         margin: 10px 0 25px;
         font-weight: 400;
     }
@@ -6655,7 +6655,7 @@ const HomepageStyles = styled.div`
     .card-plan .card__top {
         min-height: 223px;
     }
-    .card-plan .card__top .card__body {
+    .card-plan .card__top .card__.page {
         padding: 0 6px;
     }
     .card-plan .card__plan-item:not(.card__plan-item--unlimited) {
@@ -8192,11 +8192,11 @@ const HomepageStyles = styled.div`
     .connect .card--arrow:after {
     bottom: 40px;
     }
-    .connect .card__body p br {
+    .connect .card__.page p br {
     display: none;
     }
     @media (min-width: 768px) {
-    .connect .card__body p br {
+    .connect .card__.page p br {
         display: block;
     }
     }
@@ -8409,7 +8409,7 @@ const HomepageStyles = styled.div`
     .features .card-feature {
     margin-bottom: 45px;
     }
-    .features .card__head-icon + .card__body {
+    .features .card__head-icon + .card__.page {
     margin-top: 32px;
     }
     @media (min-width: 768px) {
@@ -8490,7 +8490,7 @@ const HomepageStyles = styled.div`
     height: 40px;
     margin-left: -10px;
     }
-    .security__card .card__body p + p {
+    .security__card .card__.page p + p {
     margin-top: 25px;
     }
     .write-us {
@@ -8699,7 +8699,7 @@ const HomepageStyles = styled.div`
     transform: scale(0.78);
     }
     .piechart [class^="pie"] {
-    stroke-width: 58;
+    strokeWidth: 58;
     fill: none;
     transition: all 0.45s ease;
     }
@@ -8758,7 +8758,7 @@ const HomepageStyles = styled.div`
     stroke-dasharray: 120 628.32;
     }
     .piechart .pie-white {
-    stroke-width: 70;
+    strokeWidth: 70;
     stroke-dashoffset: 0;
     stroke: #fff;
     transition-delay: 10ms;
@@ -9035,7 +9035,7 @@ const HomepageStyles = styled.div`
     .graph svg circle.stt0 {
     fill: none;
     stroke: #fff;
-    stroke-width: 40;
+    strokeWidth: 40;
     stroke-dashoffset: 0;
     stroke-dasharray: 400;
     }
@@ -9608,14 +9608,14 @@ const HomepageStyles = styled.div`
     .stt2 {
     fill: none;
     stroke: #E2E6E9;
-    stroke-width: 0.5;
+    strokeWidth: 0.5;
     stroke-linecap: square;
     }
 
     .stt3 {
     fill: none;
     stroke: #A1B4BE;
-    stroke-width: 0.5;
+    strokeWidth: 0.5;
     stroke-linecap: square;
     }
 
@@ -9659,7 +9659,7 @@ const HomepageStyles = styled.div`
     }
 
     .stt13 {
-    fill-opacity: 9.000000e-02;
+    fillOpacity: 9.000000e-02;
     }
 
     .stt14 { 
@@ -9672,7 +9672,7 @@ const HomepageStyles = styled.div`
 
     .stt16 {
     fill: #D8D8D8;
-    fill-opacity: 0.9;
+    fillOpacity: 0.9;
     }
 
     .stt17 {
@@ -9734,7 +9734,7 @@ const HomepageStyles = styled.div`
     .st8 {
     fill: none;
     stroke: #E8EEF2;
-    stroke-width: 0.5;
+    strokeWidth: 0.5;
     stroke-linecap: square;
     }
 
@@ -12656,13 +12656,13 @@ const HomepageStyles = styled.div`
     .st737 {
     fill: none;
     stroke: #B1BFC7;
-    stroke-width: 2;
+    strokeWidth: 2;
     }
 
     .st738 {
     fill: none;
     stroke: #BACDD7;
-    stroke-width: 2;
+    strokeWidth: 2;
     }
 
     .st739 {
@@ -12673,227 +12673,7 @@ const HomepageStyles = styled.div`
     fill: none;
     stroke: #B1BFC7;
     }
-
-    /* LOGINNNNNNNNNNNNNNNNN */
-
-
-
-    button.LoginBtn{
-        border-radius: 20px;
-        border: 1px solid #2b71ad;
-        background-color: #2b71ad;
-        color: #FFFFFF;
-        font-size: 12px;
-        font-weight: bold;
-        padding: 12px 45px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        transition: transform 80ms ease-in;
-    }
-    button.ghost{
-        border-radius: 20px;
-        border: 1px solid #2b71ad;
-        background-color: #2b71ad;
-        color: #FFFFFF;
-        font-size: 12px;
-        font-weight: bold;
-        padding: 12px 45px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        transition: transform 80ms ease-in;
-    }
-
-    button.LoginBtn:active {
-        transform: scale(0.95);
-    }
-
-    button.ghost:active {
-        transform: scale(0.95);
-    }
-
-    button.LoginBtn:focus {
-        outline: none;
-    }
-
-    button.ghost:focus {
-        outline: none;
-    }
-
-    button.ghost {
-        background-color: transparent;
-        border-color: #FFFFFF;
-    }
-
-    form.formLogin {
-        background-color: #FFFFFF;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        padding: 0 50px;
-        height: 100%;
-        text-align: center;
-    }
-
-    input {
-        background-color: #eee;
-        border: none;
-        padding: 12px 15px;
-        margin: 8px 0;
-        width: 100%;
-    }
-
-    .container_login {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-                0 10px 10px rgba(0,0,0,0.22);
-        position: relative;
-        overflow: hidden;
-        width: 768px;
-        max-width: 100%;
-        min-height: 480px;
-        margin: auto;
-        padding: auto;
-    }
-    .fade-down {
-        opacity: 1;
-        transition: opacity 0.5s ease-in-out;
-    }
-      
-    .fade-down-hidden {
-        opacity: 0;
-    }
-
-    .form-container {
-        position: absolute;
-        top: 0;
-        height: 100%;
-        transition: all 0.6s ease-in-out;
-    }
-
-    .sign-in-container {
-        left: 0;
-        width: 50%;
-        z-index: 2;
-    }
-
-    .forgot-password-container {
-        width: 100%;
-        z-index: 2;
-    }
-
-    .reset-password-container {
-        width: 100%;
-        z-index: 2;
-    }
-
-    .forgot-password-link {
-        color: inherit;
-        text-decoration: none;
-    }
-
-    .forgot-password-link:hover {
-        color: inherit;
-    }
-
-    .container_login.right-panel-active .sign-in-container {
-        transform: translateX(100%);
-    }
-
-    .sign-up-container {
-        left: 0;
-        width: 50%;
-        opacity: 0;
-        z-index: 1;
-    }
-
-    .container_login.right-panel-active .sign-up-container {
-        transform: translateX(100%);
-        opacity: 1;
-        z-index: 5;
-        animation: show 0.6s;
-    }
-
-    @keyframes show {
-        0%, 49.99% {
-            opacity: 0;
-            z-index: 1;
-        }
-        
-        50%, 100% {
-            opacity: 1;
-            z-index: 5;
-        }
-    }
-
-    .overlay-container {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: 50%;
-        height: 100%;
-        overflow: hidden;
-        transition: transform 0.6s ease-in-out;
-        z-index: 100;
-    }
-
-    .container_login.right-panel-active .overlay-container{
-        transform: translateX(-100%);
-    }
-
-    .overlay-login {
-        background: #2b71ad;
-        background: -webkit-linear-gradient(to right, #2b71ad, #422AFB);
-        background: linear-gradient(to right, #2b71ad, #422AFB);
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: 0 0;
-        color: #FFFFFF;
-        position: relative;
-        left: -100%;
-        height: 100%;
-        width: 200%;
-        transform: translateX(0);
-        transition: transform 0.6s ease-in-out;
-    }
-
-    .container_login.right-panel-active .overlay-login {
-        transform: translateX(50%);
-    }
-
-    .overlay-panel-login {
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        padding: 0 40px;
-        text-align: center;
-        top: 0;
-        height: 100%;
-        width: 50%;
-        transform: translateX(0);
-        transition: transform 0.6s ease-in-out;
-    }
-
-    .overlay-left-login {
-        transform: translateX(-20%);
-    }
-
-    .container_login.right-panel-active .overlay-left-login {
-        transform: translateX(0);
-    }
-
-    .overlay-right-login {
-        right: 0;
-        transform: translateX(0);
-    }
-
-    .container_login.right-panel-active .overlay-right-login {
-        transform: translateX(20%);
-    }
-
+    
 `
 
 export default HomepageStyles;

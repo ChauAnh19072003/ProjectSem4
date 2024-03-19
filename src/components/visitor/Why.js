@@ -96,7 +96,7 @@ const Why = ({ testimonials, itemWidth }) => {
                 <div className="row">
                   <div className="col-12">
                     <ul className="slider__navigation why__slider-navigation">
-                      {testimonials.map((_, index) => (
+                      {testimonials.map((reason, index) => (
                         <li
                           key={index}
                           className={index === activeIndex ? "is-active" : ""}

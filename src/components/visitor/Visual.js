@@ -15,13 +15,12 @@ const Visual_shape = () => {
       setIsAnimated(true);
     }, 500);
 
-
     return () => {
       clearInterval(intervalId);
 
       clearTimeout(animationTimeout);
     };
-  }, []); 
+  }, []);
 
   function getCurrentTime() {
     const now = new Date();
@@ -34,7 +33,7 @@ const Visual_shape = () => {
   }
 
   return (
-    <div>
+    <>
       <div className="visual__shape">
         <svg xmlns="http://www.w3.org/2000/svg" width="938" height="885">
           <defs>
@@ -91,7 +90,7 @@ const Visual_shape = () => {
 
               <div className="store js-text-animation js-fadeInUp">
                 <Link
-                  href="/"
+                  to="/visitor"
                   className="store__button store__button--apple"
                   role="img"
                   aria-label="Get Spendee on App Store"
@@ -114,7 +113,7 @@ const Visual_shape = () => {
                     />
                     <path
                       id="hover"
-                      fill-opacity=".3"
+                      fillOpacity=".3"
                       d="M137.9 41H5.1A4 4 0 0 1 1 37V5a4 4 0 0 1 4.1-4H138c2.2 0 4.1 1.8 4.1 4v32c-.1 2.2-1.9 4-4.2 4z"
                     />
                     <path
@@ -141,7 +140,7 @@ const Visual_shape = () => {
                   </svg>
                 </Link>
                 <Link
-                  href="https://play.google.com"
+                  to="https://play.google.com"
                   className="store__button store__button--google"
                   role="img"
                   aria-label="Get Spendee on Play Store"
@@ -154,7 +153,7 @@ const Visual_shape = () => {
                     />
                     <path
                       id="hover"
-                      fill-opacity=".3"
+                      fillOpacity=".3"
                       d="M137.2 41.5H5.8a5.2 5.2 0 0 1-5.3-5.1V5.6C.5 2.8 2.9.5 5.8.5h131.5c2.9 0 5.3 2.3 5.3 5.1v30.8a5.4 5.4 0 0 1-5.4 5.1z"
                     />
                     <path
@@ -164,7 +163,7 @@ const Visual_shape = () => {
                     <path
                       fill="#fff"
                       stroke="#fff"
-                      stroke-width=".7"
+                      strokeWidth=".7"
                       d="M50.2 11.1c0 .9-.3 1.6-.8 2.1-.6.6-1.4.9-2.3.9a3.3 3.3 0 0 1-3.3-3.2c0-.9.3-1.7 1-2.3.6-.6 1.4-.9 2.3-.9.5 0 .9.1 1.3.3l1 .7-.6.5c-.4-.5-1-.7-1.7-.7s-1.2.2-1.7.7c-.5.5-.7 1.1-.7 1.8a2.4 2.4 0 0 0 2.4 2.5c.7 0 1.3-.2 1.8-.7.3-.3.5-.7.5-1.3h-2.3v-.8h3.1v.4zm4.9-2.6h-2.9v2h2.6v.8h-2.6v2h2.9v.7h-3.7V7.8h3.7v.7zm3.4 5.5h-.8V8.5H56v-.7h4.4v.8h-1.8V14zm5 0V7.8h.8V14h-.8zm4.4 0h-.8V8.5h-1.8v-.7h4.4v.8h-1.8V14zm10.1-.8c-.6.6-1.4.9-2.3.9-.9 0-1.7-.3-2.3-.9-.6-.6-.9-1.4-.9-2.3 0-.9.3-1.7.9-2.3.6-.6 1.4-.9 2.3-.9.9 0 1.7.3 2.3.9.6.6.9 1.4.9 2.3 0 .9-.3 1.7-.9 2.3zm-4.1-.5c.5.5 1 .7 1.7.7s1.3-.2 1.7-.7c.5-.5.7-1.1.7-1.8s-.2-1.3-.7-1.8c-.5-.5-1-.7-1.7-.7s-1.3.2-1.7.7c-.5.5-.7 1.1-.7 1.8s.2 1.3.7 1.8zm6.2 1.3V7.8h1l3.1 4.8V7.8h.8V14h-.9l-3.2-5.1V14h-.8z"
                     />
                     <path
@@ -181,12 +180,12 @@ const Visual_shape = () => {
                         gradientTransform="matrix(13.7029 0 0 26.0466 3114.6 -11039.5)"
                         gradientUnits="userSpaceOnUse"
                       >
-                        <stop offset="0" stop-color="#00a0ff" />
-                        <stop offset="0" stop-color="#00a1ff" />
-                        <stop offset=".3" stop-color="#00beff" />
-                        <stop offset=".5" stop-color="#00d2ff" />
-                        <stop offset=".8" stop-color="#00dfff" />
-                        <stop offset="1" stop-color="#00e3ff" />
+                        <stop offset="0" stopColor="#00a0ff" />
+                        <stop offset="0" stopColor="#00a1ff" />
+                        <stop offset=".3" stopColor="#00beff" />
+                        <stop offset=".5" stopColor="#00d2ff" />
+                        <stop offset=".8" stopColor="#00dfff" />
+                        <stop offset="1" stopColor="#00e3ff" />
                       </linearGradient>
                       <path
                         fill="url(#google_a)"
@@ -203,10 +202,10 @@ const Visual_shape = () => {
                         gradientTransform="matrix(10.772 0 0 8.8891 2544.2 -3941.4)"
                         gradientUnits="userSpaceOnUse"
                       >
-                        <stop offset="0" stop-color="#ffe000" />
-                        <stop offset=".4" stop-color="#ffbd00" />
-                        <stop offset=".8" stop-color="orange" />
-                        <stop offset="1" stop-color="#ff9c00" />
+                        <stop offset="0" stopColor="#ffe000" />
+                        <stop offset=".4" stopColor="#ffbd00" />
+                        <stop offset=".8" stopColor="orange" />
+                        <stop offset="1" stopColor="#ff9c00" />
                       </linearGradient>
                       <path
                         fill="url(#google_b)"
@@ -223,8 +222,8 @@ const Visual_shape = () => {
                         gradientTransform="matrix(17.688 0 0 13.365 4093.3 -5846.2)"
                         gradientUnits="userSpaceOnUse"
                       >
-                        <stop offset="0" stop-color="#ff3a44" />
-                        <stop offset="1" stop-color="#c31162" />
+                        <stop offset="0" stopColor="#ff3a44" />
+                        <stop offset="1" stopColor="#c31162" />
                       </linearGradient>
                       <path
                         fill="url(#google_c)"
@@ -241,11 +240,11 @@ const Visual_shape = () => {
                         gradientTransform="matrix(17.688 0 0 13.3605 4093.3 -5681.2)"
                         gradientUnits="userSpaceOnUse"
                       >
-                        <stop offset="0" stop-color="#32a071" />
-                        <stop offset=".1" stop-color="#2da771" />
-                        <stop offset=".5" stop-color="#15cf74" />
-                        <stop offset=".8" stop-color="#06e775" />
-                        <stop offset="1" stop-color="#00f076" />
+                        <stop offset="0" stopColor="#32a071" />
+                        <stop offset=".1" stopColor="#2da771" />
+                        <stop offset=".5" stopColor="#15cf74" />
+                        <stop offset=".8" stopColor="#06e775" />
+                        <stop offset="1" stopColor="#00f076" />
                       </linearGradient>
                       <path
                         fill="url(#google_d)"
@@ -276,7 +275,7 @@ const Visual_shape = () => {
                   </p>
                 </div>
 
-                <div className={`piechart  ${isAnimated ? "is-animated" : ""}`}>
+                <div className={`piechart ${isAnimated ? "is-animated" : ""}`}>
                   <svg viewBox="0 0 450 400" className="piechart-svg">
                     <circle
                       className="pie-1"
@@ -334,7 +333,13 @@ const Visual_shape = () => {
                       x="0px"
                       y="0px"
                       viewBox="0 0 100 100"
-                      style={{ enableBackground: "new 0 0 100 100" }}
+                      style={{
+                        position: "absolute",
+                        top: "30%", 
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        enableBackground: "new 0 0 100 100"
+                      }}
                       xmlSpace="preserve"
                     >
                       <ellipse
@@ -370,7 +375,12 @@ const Visual_shape = () => {
                       x="0px"
                       y="0px"
                       viewBox="0 0 100 100"
-                      style={{ enableBackground: "new 0 0 100 100" }}
+                      style={{ 
+                        position: "absolute",
+                        top: "25%", 
+                        left: "45%",
+                        transform: "translate(-50%, -50%)",
+                        enableBackground: "new 0 0 100 100" }}
                       xmlSpace="preserve"
                     >
                       <path
@@ -390,7 +400,12 @@ const Visual_shape = () => {
                       x="0px"
                       y="0px"
                       viewBox="0 0 100 100"
-                      style={{ enableBackground: "new 0 0 100 100" }}
+                      style={{ 
+                        position: "absolute",
+                        top: "25%", 
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        enableBackground: "new 0 0 100 100" }}
                       xmlSpace="preserve"
                     >
                       <path
@@ -410,7 +425,12 @@ const Visual_shape = () => {
                       x="0px"
                       y="0px"
                       viewBox="0 0 100 100"
-                      style={{ enableBackground: "new 0 0 100 100" }}
+                      style={{ 
+                        position: "absolute",
+                        top: "25%", 
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        enableBackground: "new 0 0 100 100" }}
                       xmlSpace="preserve"
                     >
                       <ellipse
@@ -446,7 +466,12 @@ const Visual_shape = () => {
                       x="0px"
                       y="0px"
                       viewBox="0 0 100 100"
-                      style={{ enableBackground: "new 0 0 100 100" }}
+                      style={{ 
+                        position: "absolute",
+                        top: "25%", 
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        enableBackground: "new 0 0 100 100" }}
                       xmlSpace="preserve"
                     >
                       <path
@@ -482,7 +507,12 @@ const Visual_shape = () => {
                       x="0px"
                       y="0px"
                       viewBox="0 0 100 100"
-                      style={{ enableBackground: "new 0 0 100 100" }}
+                      style={{ 
+                        position: "absolute",
+                        top: "25%", 
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        enableBackground: "new 0 0 100 100" }}
                       xmlSpace="preserve"
                     >
                       <path
@@ -530,19 +560,20 @@ const Visual_shape = () => {
                           x="0px"
                           y="0px"
                           viewBox="0 0 100 100"
-                          style={{ enableBackground: "new 0 0 100 100" }}
+                          style={{ 
+                            enableBackground: "new 0 0 100 100" }}
                           xmlSpace="preserve"
                         >
                           <path
                             style={{ fill: "#ffffff" }}
                             fill="#ffffff"
                             d="M42.4,1.8c-0.1-1-0.9-1.8-1.7-1.8c0,0,0,0-0.1,0c-0.9,0-1.6,0.9-1.7,1.9l-1.5,21.9c-0.1,1.4-2.1,1.4-2.2,0 L33.6,1.9C33.6,0.8,32.8,0,31.9,0c-0.9,0-1.7,0.8-1.8,1.9l-1.5,21.9c-0.1,1.4-2.1,1.4-2.2,0L24.8,1.9C24.8,0.9,24,0,23.1,0 c0,0,0,0-0.1,0c-0.9,0-1.6,0.8-1.7,1.8L18.2,27c-0.9,7.4,2.4,14.5,8.2,17.4l-2.7,45.1c-0.2,2.7,0.6,5.4,2.2,7.4 c1.6,2,3.8,3.1,6.1,3.1h0c2.3,0,4.5-1.1,6.1-3.1c1.6-2,2.4-4.7,2.2-7.4l-2.7-45.1c5.7-2.9,9.1-10,8.2-17.4L42.4,1.8z"
-                          />
+                          ></path>
                           <path
                             style={{ fill: "#ffffff" }}
                             fill="#ffffff"
                             d="M63.3,0.4C63.8,0,64.4-0.1,65,0.1c0.2,0.1,17.5,6.6,17.5,26.9c0,14.6-5.1,22.1-7.6,25.1l2.5,2.7 c0.3,0.3,0.5,0.8,0.6,1.3l2.1,34c0,5.7-3.2,10-8.9,10c-5.1,0-8.7-3.4-8.7-9v-89C62.4,1.4,62.8,0.8,63.3,0.4z"
-                          />
+                          ></path>
                         </svg>
                       </div>
                     </div>
@@ -566,7 +597,8 @@ const Visual_shape = () => {
                           x="0px"
                           y="0px"
                           viewBox="0 0 100 100"
-                          style={{ enableBackground: "new 0 0 100 100" }}
+                          style={{ 
+                            enableBackground: "new 0 0 100 100" }}
                           xmlSpace="preserve"
                         >
                           <path
@@ -615,7 +647,12 @@ const Visual_shape = () => {
                           x="0px"
                           y="0px"
                           viewBox="0 0 100 100"
-                          style={{ enableBackground: "new 0 0 100 100" }}
+                          style={{ 
+                            position: "absolute",
+                            top: "25%", 
+                            left: "45%",
+                            transform: "translate(-50%, -50%)",
+                            enableBackground: "new 0 0 100 100" }}
                           xmlSpace="preserve"
                         >
                           <path
@@ -652,7 +689,12 @@ const Visual_shape = () => {
                           x="0px"
                           y="0px"
                           viewBox="0 0 100 100"
-                          style={{ enableBackground: "new 0 0 100 100" }}
+                          style={{ 
+                            position: "absolute",
+                            top: "25%", 
+                            left: "45%",
+                            transform: "translate(-50%, -50%)",
+                            enableBackground: "new 0 0 100 100" }}
                           xmlSpace="preserve"
                         >
                           <path
@@ -13068,8 +13110,8 @@ const Visual_shape = () => {
                         x2="291"
                         y2="667.1976"
                       >
-                        <stop offset="0" stop-color="#FFB62A" />
-                        <stop offset="1" stop-color="#F5A202" />
+                        <stop offset="0" stopColor="#FFB62A" />
+                        <stop offset="1" stopColor="#F5A202" />
                       </linearGradient>
                       <rect
                         x="279"
@@ -13086,8 +13128,8 @@ const Visual_shape = () => {
                         x2="321"
                         y2="667.1951"
                       >
-                        <stop offset="0" stop-color="#FFB62A" />
-                        <stop offset="1" stop-color="#F5A202" />
+                        <stop offset="0" stopColor="#FFB62A" />
+                        <stop offset="1" stopColor="#F5A202" />
                       </linearGradient>
                       <rect
                         x="309"
@@ -13104,8 +13146,8 @@ const Visual_shape = () => {
                         x2="353"
                         y2="667.1962"
                       >
-                        <stop offset="0" stop-color="#FFB62A" />
-                        <stop offset="1" stop-color="#F5A202" />
+                        <stop offset="0" stopColor="#FFB62A" />
+                        <stop offset="1" stopColor="#F5A202" />
                       </linearGradient>
                       <rect
                         x="341"
@@ -13122,8 +13164,8 @@ const Visual_shape = () => {
                         x2="473"
                         y2="667.1975"
                       >
-                        <stop offset="0" stop-color="#FFB62A" />
-                        <stop offset="1" stop-color="#F5A202" />
+                        <stop offset="0" stopColor="#FFB62A" />
+                        <stop offset="1" stopColor="#F5A202" />
                       </linearGradient>
                       <rect
                         x="461"
@@ -13140,8 +13182,8 @@ const Visual_shape = () => {
                         x2="507"
                         y2="667.1886"
                       >
-                        <stop offset="0" stop-color="#FFB62A" />
-                        <stop offset="1" stop-color="#F5A202" />
+                        <stop offset="0" stopColor="#FFB62A" />
+                        <stop offset="1" stopColor="#F5A202" />
                       </linearGradient>
                       <rect
                         x="495"
@@ -13158,8 +13200,8 @@ const Visual_shape = () => {
                         x2="563"
                         y2="667.1961"
                       >
-                        <stop offset="0" stop-color="#FFB62A" />
-                        <stop offset="1" stop-color="#F5A202" />
+                        <stop offset="0" stopColor="#FFB62A" />
+                        <stop offset="1" stopColor="#F5A202" />
                       </linearGradient>
                       <rect
                         x="551"
@@ -13176,8 +13218,8 @@ const Visual_shape = () => {
                         x2="729"
                         y2="667.1931"
                       >
-                        <stop offset="0" stop-color="#FFB62A" />
-                        <stop offset="1" stop-color="#F5A202" />
+                        <stop offset="0" stopColor="#FFB62A" />
+                        <stop offset="1" stopColor="#F5A202" />
                       </linearGradient>
                       <rect
                         x="717"
@@ -13194,8 +13236,8 @@ const Visual_shape = () => {
                         x2="794"
                         y2="667.1913"
                       >
-                        <stop offset="0" stop-color="#FFB62A" />
-                        <stop offset="1" stop-color="#F5A202" />
+                        <stop offset="0" stopColor="#FFB62A" />
+                        <stop offset="1" stopColor="#F5A202" />
                       </linearGradient>
                       <rect
                         x="782"
@@ -13212,8 +13254,8 @@ const Visual_shape = () => {
                         x2="891"
                         y2="667.1981"
                       >
-                        <stop offset="0" stop-color="#FFB62A" />
-                        <stop offset="1" stop-color="#F5A202" />
+                        <stop offset="0" stopColor="#FFB62A" />
+                        <stop offset="1" stopColor="#F5A202" />
                       </linearGradient>
                       <rect
                         x="879"
@@ -13230,8 +13272,8 @@ const Visual_shape = () => {
                         x2="925"
                         y2="667.1951"
                       >
-                        <stop offset="0" stop-color="#FFB62A" />
-                        <stop offset="1" stop-color="#F5A202" />
+                        <stop offset="0" stopColor="#FFB62A" />
+                        <stop offset="1" stopColor="#F5A202" />
                       </linearGradient>
                       <rect
                         x="913"
@@ -13717,7 +13759,7 @@ const Visual_shape = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

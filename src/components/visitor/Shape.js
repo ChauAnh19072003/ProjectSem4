@@ -71,8 +71,8 @@ const Shape = () => {
                       y1="13.964%"
                       y2="86.393%"
                     >
-                      <stop offset="0%" stop-color="#EFF2F6" />
-                      <stop offset="100%" stop-color="#FFF" />
+                      <stop offset="0%" stopColor="#EFF2F6" />
+                      <stop offset="100%" stopColor="#FFF" />
                     </linearGradient>
                   </defs>
                   <path
@@ -189,8 +189,8 @@ const Shape = () => {
                     gradientTransform="matrix(540.7985 0 0 -341.7284 18354.572 194222.453)"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop offset="0" stop-color="#fff" stopOpacity="0" />
-                    <stop offset="1" stop-color="#12c48b" />
+                    <stop offset="0" stopColor="#fff" stopOpacity="0" />
+                    <stop offset="1" stopColor="#12c48b" />
                   </linearGradient>
                   <path
                     fill="url(#svg-graph-grad)"
@@ -206,13 +206,13 @@ const Shape = () => {
                     gradientTransform="matrix(540.8453 0 0 -207.0747 18356.117 117604.508)"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop offset="0" stop-color="#52ebba" />
-                    <stop offset="1" stop-color="#12c48b" />
+                    <stop offset="0" stopColor="#52ebba" />
+                    <stop offset="1" stopColor="#12c48b" />
                   </linearGradient>
                   <path
                     fill="none"
                     stroke="url(#svg-graph-grad-2)"
-                    stroke-width="3"
+                    strokeWidth="3"
                     d="M1.4 209.1l52.5-110 98.7 61.4L218 82.1l82.1 17 64.1-6.3L459.1 2l83.1 35.9"
                   />
                   <path
@@ -276,8 +276,8 @@ const Shape = () => {
                     gradientTransform="matrix(227.4268 0 0 -340.3369 43247.5 192746.7)"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop offset="0" stop-color="#eff2f6" />
-                    <stop offset="1" stop-color="#fff" />
+                    <stop offset="0" stopColor="#eff2f6" />
+                    <stop offset="1" stopColor="#fff" />
                   </linearGradient>
                   <path
                     fill="url(#nuber-2)"
@@ -351,8 +351,8 @@ const Shape = () => {
                     gradientTransform="matrix(225.5908 0 0 -344.9268 43121.5 196387)"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop offset="0" stop-color="#eff2f6"></stop>
-                    <stop offset="1" stop-color="#fff"></stop>
+                    <stop offset="0" stopColor="#eff2f6"></stop>
+                    <stop offset="1" stopColor="#fff"></stop>
                   </linearGradient>
                   <path
                     fill="url(#number-3)"

@@ -3,6 +3,7 @@ import HomepageStyles from "layouts/visitor/styles";
 import Header from "components/visitor/Header";
 import Footer from "components/visitor/Footer";
 import AuthService from 'services/auth/auth.service';
+import AuthStyles from './AuthStyles';
 import {
   Alert,
   AlertIcon,
@@ -41,8 +42,8 @@ const ForgotPassword = () => {
     }
   }
   return (
-    <HomepageStyles>
-    <body className="body">
+          <HomepageStyles>
+
       <Header />
       <div className="visual">
         <div className="visual__shape">
@@ -85,6 +86,7 @@ const ForgotPassword = () => {
           </svg>
         </div>
       </div>
+      <AuthStyles>
       <div
         className="container_login visual container">
         <div className="form-container forgot-password-container">
@@ -123,11 +125,12 @@ const ForgotPassword = () => {
           </form>
         </div>
       </div>
+      </AuthStyles>
       <div className="footer">
         <Footer />
       </div>
-    </body>
-  </HomepageStyles>
+      </HomepageStyles>
+
   )
 }
 

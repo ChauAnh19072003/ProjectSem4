@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
-  const headerElement = document.getElementById("myHeader");
+  const headerRef = useRef(null);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
-      if (headerElement) {
-        const sticky = headerElement.offsetTop;
-  
-        if (window.pageYOffset > sticky) {
-          setIsHeaderFixed(true);
-        } else {
-          setIsHeaderFixed(false);
-        }
-      }
+      if (!headerRef.current) return;
+
+      const sticky = headerRef.current.offsetTop;
+      setIsHeaderFixed(window.pageYOffset > sticky);
     };
+
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll);
 
@@ -23,10 +26,13 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <header
-      className={`header ${isHeaderFixed ? "header--fixed" : ""}`}
-      id="myHeader"
+      className={`header ${isMenuOpen ? "is-open" : ""} ${
+        isHeaderFixed ? "header--fixed" : ""
+      }`}
+      ref={headerRef}
     >
       <div className="header__wrapper">
         <div className="container">
@@ -34,12 +40,12 @@ const Header = () => {
             <div className="col-6 col-md-2"></div>
             <div className="col-6 col-md-10">
               <div className="header__menu text-right">
-                <Link
-                  to="/visitor"
+                <div
                   className="button__menu button button--icon button--small button--outline-primary"
+                  onClick={toggleMenu}
                 >
                   <span className="hide">Menu</span>
-                  <div className="hamburger">
+                  <div className={`hamburger ${isMenuOpen ? "is-active" : ""}`}>
                     <span></span>
                     <span></span>
                     <span></span>
@@ -47,9 +53,11 @@ const Header = () => {
                     <span></span>
                     <span></span>
                   </div>
-                </Link>
+                </div>
               </div>
-              <div className="header__navigation">
+              <div
+                className={`header__navigation ${isMenuOpen ? "is-open" : ""}`}
+              >
                 <div className="header__navigation-wrapper">
                   <nav>
                     <ul className="header__navigation-main">
@@ -60,7 +68,7 @@ const Header = () => {
                         <Link to="/visitor">About us</Link>
                       </li>
                       <li className="link-hr">
-                        <Link to="/auth/signin" exact>Login</Link>
+                        <Link to="/auth/signin">Login</Link>
                       </li>
                     </ul>
                   </nav>
@@ -70,7 +78,7 @@ const Header = () => {
                         to="/auth/signup"
                         className="button button--primary button--small"
                       >
-                        Login
+                        Sign Up
                       </Link>
                     </li>
                   </ul>
