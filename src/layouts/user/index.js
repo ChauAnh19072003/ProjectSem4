@@ -117,20 +117,6 @@ export default function Dashboard(props) {
 						transitionDuration='.2s, .2s, .35s'
 						transitionProperty='top, bottom, width'
 						transitionTimingFunction='linear, linear, ease'>
-						<Portal>
-							<Box>
-								<Navbar
-									onOpen={onOpen}
-									logoText={'Horizon UI Dashboard PRO'}
-									brandText={getActiveRoute(routes)}
-									secondary={getActiveNavbar(routes)}
-									message={getActiveNavbarText(routes)}
-									fixed={fixed}
-									{...rest}
-								/>
-							</Box>
-						</Portal>
-
 						{getRoute() ? (
 							<Box mx='auto' p={{ base: '20px', md: '30px' }} pe='20px' minH='100vh' pt='50px'>
 								<Switch>

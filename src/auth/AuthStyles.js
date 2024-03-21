@@ -11,7 +11,14 @@ const AuthStyles = styled.div `
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
     0 10px 10px rgba(0,0,0,0.22);
   }
-  
+  .forgot-password-link{
+    text-decoration: none;
+    color: black;
+  }
+  .forgot-password-link:hover{
+    color: #5995fd;
+  }
+
   .forms-container {
     position: absolute;
     width: 100%;
@@ -260,13 +267,15 @@ const AuthStyles = styled.div `
       min-height: 800px;
       height: 100vh;
     }
+
+
     .signin-signup {
       width: 100%;
       top: 95%;
       transform: translate(-50%, -100%);
       transition: 1s 0.8s ease-in-out;
     }
-  
+
     .signin-signup,
     .container.sign-up-mode .signin-signup {
       left: 50%;
@@ -330,7 +339,18 @@ const AuthStyles = styled.div `
       top: initial;
       transition: 2s ease-in-out;
     }
-  
+    .container.password-reset-form:before {
+      width: 1500px;
+      height: 1500px;
+      transform: translateX(-50%);
+      left: 30%;
+      bottom: 40%;
+      right: initial;
+      top: initial;
+      transition: 2s ease-in-out;
+    }
+
+    
     .container.sign-up-mode:before {
       transform: translate(-50%, 100%);
       bottom: 32%;

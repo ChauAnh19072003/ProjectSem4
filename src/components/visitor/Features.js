@@ -1,34 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 const Features = () => {
-  const [scrolling, setScrolling] = useState(false);
-
-  const handleScroll = () => {
-    const features = document.getElementById("features");
-    if (features) {
-      const rect = features.getBoundingClientRect();
-      setScrolling(
-        rect.top <= window.innerHeight * 0.5 &&
-          rect.bottom >= window.innerHeight * 0.5
-      );
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
   return (
     <div className="container circle invert">
       <div className="row">
         <div className="col-12 text-center">
           <h2
-            className={`features__title js-text-animation ${
-              scrolling ? "js-fadeInUp" : ""
-            }`}
+            className={`features__title js-text-animation js-fadeInUp`}
           >
             <b>Features</b> our users love
           </h2>
@@ -37,9 +15,7 @@ const Features = () => {
       <div className="row features__cards">
         <div className="col-12 col-md-6 col-lg-4">
           <div
-            className={`card card-feature js-text-animation ${
-              scrolling ? "js-fadeInUp" : ""
-            }`}
+            className={`card card-feature js-text-animation js-fadeInUp`}
           >
             <div className="card__head card__head-icon">
               <span className="icon-wallet"></span>
@@ -57,9 +33,7 @@ const Features = () => {
         </div>
         <div className="col-12 col-md-6 col-lg-4">
           <div
-            className={`card card-feature js-text-animation ${
-              scrolling ? "js-fadeInUp" : ""
-            }`}
+            className={`card card-feature js-text-animation js-fadeInUp`}
           >
             <div className="card__head card__head-icon">
               <span className="icon-bank"></span>
@@ -74,9 +48,7 @@ const Features = () => {
         </div>
         <div className="col-12 col-md-6 col-lg-4">
           <div
-            className={`card card-feature js-text-animation ${
-              scrolling ? "js-fadeInUp" : ""
-            }`}
+            className={`card card-feature js-text-animation js-fadeInUp`}
           >
             <div className="card__head card__head-icon">
               <span className="icon-person"></span>
@@ -94,9 +66,7 @@ const Features = () => {
         </div>
         <div className="col-12 col-md-6 col-lg-4">
           <div
-            className={`card card-feature js-text-animation ${
-              scrolling ? "js-fadeInUp" : ""
-            }`}
+            className={`card card-feature js-text-animation js-fadeInUp`}
           >
             <div className="card__head card__head-icon">
               <span className="icon-currency"></span>
@@ -114,9 +84,7 @@ const Features = () => {
         </div>
         <div className="col-12 col-md-6 col-lg-4">
           <div
-            className={`card card-feature js-text-animation ${
-              scrolling ? "js-fadeInUp" : ""
-            }`}
+            className={`card card-feature js-text-animation js-fadeInUp`}
           >
             <div className="card__head card__head-icon">
               <span className="icon-bell"></span>
@@ -133,9 +101,7 @@ const Features = () => {
         </div>
         <div className="col-12 col-md-6 col-lg-4">
           <div
-            className={`card card-feature js-text-animation ${
-              scrolling ? "js-fadeInUp" : ""
-            }`}
+            className={`card card-feature js-text-animation js-fadeInUp`}
           >
             <div className="card__head card__head-icon">
               <span className="icon-cloud"></span>

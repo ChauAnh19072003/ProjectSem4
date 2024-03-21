@@ -1,33 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 const Control_budget = () => {
-  const [scrolling, setScrolling] = useState(false);
-
-  const handleScroll = () => {
-    const control_budget = document.getElementById("control-budget");
-    if (control_budget) {
-      const rect = control_budget.getBoundingClientRect();
-      setScrolling(
-        rect.top <= window.innerHeight * 0.5,
-      );
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
   return (
     <div className="container">
       <div className="row justify-content-center control-budget__cards">
         <div className="col-12 col-md-6 col-lg-4">
           <div
-            className={`card card-preview js-text-animation ${
-              scrolling ? "js-fadeInUp" : ""
-            }`}
+            className={`card card-preview js-text-animation js-fadeInUp`}
           >
             <div className="card__head card__head-icon card__head-icon--green">
               <span className="icon icon-dashboard"></span>
@@ -43,9 +22,7 @@ const Control_budget = () => {
         </div>
         <div className="col-12 col-md-6 col-lg-4">
           <div
-            className={`card card-preview js-text-animation ${
-              scrolling ? "js-fadeInUp" : ""
-            }`}
+            className={`card card-preview js-text-animation js-fadeInUp`}
           >
             <div className="card__head card__head-icon card__head-icon--pink">
               <span className="icon icon-pie-chart"></span>
@@ -61,9 +38,7 @@ const Control_budget = () => {
         </div>
         <div className="col-12 col-md-6 col-lg-4">
           <div
-            className={`card card-preview js-text-animation ${
-              scrolling ? "js-fadeInUp" : ""
-            }`}
+            className={`card card-preview js-text-animation js-fadeInUp`}
           >
             <div className="card__head card__head-icon card__head-icon--blue">
               <span className="icon icon-cash"></span>

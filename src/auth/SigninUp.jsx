@@ -13,7 +13,6 @@ import {
   Slide,
   Box,
 } from "@chakra-ui/react";
-import Card from "components/card/Card";
 const Login = () => {
   const history = useHistory();
   const fadeDuration = 4;
@@ -21,20 +20,12 @@ const Login = () => {
   const [signupSuccessMessage, setSignupSuccessMessage] = useState({});
   const [showErrors, setShowErrors] = useState({});
   const [showErrorAlert, setShowErrorAlert] = useState(false);
-  const [activePanel, setActivePanel] = useState("sign-in");
   const [isCollapseOpen, setIsCollapseOpen] = useState(true);
   const [isSuccessOpen, setIsSuccessOpen] = useState(true);
   const [isSignUpMode, setIsSignUpMode] = useState(false);
 
   const toggleMode = () => {
     setIsSignUpMode(!isSignUpMode);
-  };
-  const switchToSignIn = () => {
-    setActivePanel("sign-in");
-  };
-
-  const switchToSignUp = () => {
-    setActivePanel("sign-up");
   };
 
   useEffect(() => {
@@ -150,6 +141,7 @@ const Login = () => {
   return (
     <HomepageStyles>
       <Header />
+      
       <Slide
         direction="top"
         in={isCollapseOpen}
@@ -188,8 +180,7 @@ const Login = () => {
           </Box>
         )}
       </Slide>
-      <div className="visual">
-      </div>
+      <div className="visual"></div>
       <AuthStyles>
         <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
           <div className="forms-container">
@@ -271,11 +262,8 @@ const Login = () => {
           <div className="panels-container">
             <div className="panel left-panel">
               <div className="content">
-                <h3>New here ?</h3>
-                <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Debitis, ex ratione. Aliquid!
-                </p>
+                <h3>Hello, Friend!</h3>
+                <p>Enter your personal details and start journey with us</p>
                 <button className="btn transparent" onClick={toggleMode}>
                   Sign up
                 </button>
@@ -284,10 +272,9 @@ const Login = () => {
             </div>
             <div className="panel right-panel">
               <div className="content">
-                <h3>One of us ?</h3>
+                <h3>Welcome Back!</h3>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nostrum laboriosam ad deleniti.
+                  To keep connected with us please login with your personal info
                 </p>
                 <button className="btn transparent" onClick={toggleMode}>
                   Sign in

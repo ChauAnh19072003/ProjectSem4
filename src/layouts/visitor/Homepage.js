@@ -51,7 +51,8 @@ const Homepage = () => {
   return (
     <>
       <HomepageStyles>
-        <Header />
+      <Header />
+
         <div className="visual">
           <VisualShape />
         </div>

@@ -1,47 +1,15 @@
 import React, { useState, useEffect } from "react";
 
 const Shape = () => {
-  const [isAnimated, setIsAnimated] = useState(false);
-  const [isActived, setIsActived] = useState(false);
-  const [scrolling, setScrolling] = useState(false);
-
-
-  const handleScroll = () => {
-    const shapes = document.getElementById('shapes');
-    if (shapes) {
-        const rect = shapes.getBoundingClientRect();
-        setScrolling(rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.5);
-    }
-  };
-
-  useEffect(() => {
-    // Animation visual__shape
-    const animationTimeout = setTimeout(() => {
-      setIsAnimated(true);
-      setIsActived(true);
-    });
-
-    // Fadeinup
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      // Cleanup fadeinup
-      window.removeEventListener("scroll", handleScroll);
-
-      // Cleanup timeout
-      clearTimeout(animationTimeout);
-    };
-  }, []); // Empty dependency array means this effect runs once after the initial render
-
   return (
     <div>
       <div className="container circle">
         <div className="row">
           <div className="col-12">
             <h2
-              className={`shape__heading text-center js-text-animation ${
-                scrolling ? "js-fadeInUp" : ""
-              }`}
+              className="shape__heading text-center js-text-animation js-fadeInUp
+              "
+              s
             >
               How to get your <br />
               <b>money into shape?</b>
@@ -53,11 +21,7 @@ const Shape = () => {
         <div className="row shape__step shape__step--first">
           <div className="col-12 col-md-10 col-lg-5">
             <div className="shape__step-box">
-              <div
-                className={`shape__step-number js-text-animation ${
-                  scrolling ? "js-fadeInUp" : ""
-                }`}
-              >
+              <div className="shape__step-number js-text-animation js-fadeInUp">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="145"
@@ -83,42 +47,22 @@ const Shape = () => {
                   />
                 </svg>
               </div>
-              <span
-                className={`sub-heading js-text-animation ${
-                  scrolling ? "js-fadeInUp" : ""
-                }`}
-              >
+              <span className="sub-heading js-text-animation js-fadeInUp">
                 Step 1
               </span>
-              <h3
-                className={`heading js-text-animation ${
-                  scrolling ? "js-fadeInUp" : ""
-                }`}
-              >
+              <h3 className="heading js-text-animation js-fadeInUp">
                 Track your cash flow
               </h3>
               <ul>
-                <li
-                  className={`js-text-animation ${
-                    scrolling ? "js-fadeInUp" : ""
-                  }`}
-                >
+                <li className="js-text-animation js-fadeInUp">
                   Connect your bank accounts and all your transactions will get
                   automatically imported to Spendee.
                 </li>
-                <li
-                  className={`js-text-animation ${
-                    scrolling ? "js-fadeInUp" : ""
-                  }`}
-                >
+                <li className="js-text-animation js-fadeInUp">
                   Connect your crypto wallet and E-Wallet for complete overview
                   of your cash flow.
                 </li>
-                <li
-                  className={`js-text-animation ${
-                    scrolling ? "js-fadeInUp" : ""
-                  }`}
-                >
+                <li className="js-text-animation js-fadeInUp">
                   Add your cash expenses manually.
                 </li>
               </ul>
@@ -174,11 +118,6 @@ const Shape = () => {
                 </div>
               </div>
               <div className="svg-graph">
-                <div
-                  className={`svg-graph__mask  ${
-                    isAnimated ? "is-animated" : ""
-                  }`}
-                ></div>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 543 344">
                   <linearGradient
                     id="svg-graph-grad"
@@ -190,7 +129,7 @@ const Shape = () => {
                     gradientUnits="userSpaceOnUse"
                   >
                     <stop offset="0" stopColor="#fff" stopOpacity="0" />
-                    <stop offset="1" stopColor="#12c48b" />
+                    <stop offset="1" stopColor="#12c48b"/>
                   </linearGradient>
                   <path
                     fill="url(#svg-graph-grad)"
@@ -225,24 +164,21 @@ const Shape = () => {
                   />
                 </svg>
               </div>
-              <div
-                className={`card card-balance__status  ${
-                  isAnimated ? " is-animated" : ""
-                }`}
-              >
+              <div className="card card-balance__status is-animated">
                 <div className="card__body">
                   <div className="icon">
                     <span className="icon-arrow-up"></span>
                   </div>
                   <p>
-                    Current Balance  <span className="color-green" id="positive">+ 6 490 USD</span>
+                    Current Balance{" "}
+                    <span className="color-green" id="positive">
+                      + 6 490 USD
+                    </span>
                   </p>
                 </div>
               </div>
               <div
-                className={`card card-balance__status card-balance__status--down  ${
-                  isAnimated ? " is-animated" : ""
-                }`}
+                className={`card card-balance__status card-balance__status--down  is-animated`}
               >
                 <div className="card__body">
                   <div className="icon">
@@ -285,42 +221,22 @@ const Shape = () => {
                   />
                 </svg>
               </div>
-              <span
-                className={`sub-heading js-text-animation ${
-                  scrolling ? "js-fadeInUp" : ""
-                }`}
-              >
+              <span className={`sub-heading js-text-animation js-fadeInUp" `}>
                 Step 2
               </span>
-              <h3
-                className={`heading js-text-animation ${
-                  scrolling ? "js-fadeInUp" : ""
-                }`}
-              >
+              <h3 className={`heading js-text-animation js-fadeInUps`}>
                 Understand your financial&nbsp;habits
               </h3>
               <ul>
-                <li
-                  className={`js-text-animation ${
-                    scrolling ? "js-fadeInUp" : ""
-                  }`}
-                >
+                <li className={`js-text-animation js-fadeInUp`}>
                   Analyze your finance with beautiful, simple and easy to
                   understand graphic. No need for complicated Excel sheets.
                 </li>
-                <li
-                  className={`js-text-animation ${
-                    scrolling ? "js-fadeInUp" : ""
-                  }`}
-                >
+                <li className={`js-text-animation js-fadeInUp`}>
                   See where your money goes and where they come from every
                   month.
                 </li>
-                <li
-                  className={`js-text-animation ${
-                    scrolling ? "js-fadeInUp" : ""
-                  }`}
-                >
+                <li className={`js-text-animation js-fadeInUp`}>
                   See whether you spend less than you earn in one place and on 1
                   tap.
                 </li>
@@ -332,9 +248,7 @@ const Shape = () => {
           <div className="col-12 col-lg-5">
             <div className="shape__step-box">
               <div
-                className={`shape__step-number js-text-animation ${
-                  scrolling ? "js-fadeInUp" : ""
-                }`}
+                className={`shape__step-number js-text-animation js-fadeInUp`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -360,42 +274,22 @@ const Shape = () => {
                   ></path>
                 </svg>
               </div>
-              <span
-                className={`sub-heading js-text-animation ${
-                  scrolling ? "js-fadeInUp" : ""
-                }`}
-              >
+              <span className={`sub-heading js-text-animation js-fadeInUp`}>
                 Step 3
               </span>
-              <h3
-                className={`heading js-text-animation ${
-                  scrolling ? "js-fadeInUp" : ""
-                }`}
-              >
+              <h3 className={`heading js-text-animation js-fadeInUp`}>
                 Make your spending stress–free
               </h3>
               <ul>
-                <li
-                  className={`js-text-animation ${
-                    scrolling ? "js-fadeInUp" : ""
-                  }`}
-                >
+                <li className={`js-text-animation js-fadeInUp`}>
                   Set smart budgets to help you not to overspend in chosen
                   category.
                 </li>
-                <li
-                  className={`js-text-animation ${
-                    scrolling ? "js-fadeInUp" : ""
-                  }`}
-                >
+                <li className={`js-text-animation js-fadeInUp`}>
                   Know how much you can spend daily in order to stick to your
                   budget.
                 </li>
-                <li
-                  className={`js-text-animation ${
-                    scrolling ? "js-fadeInUp" : ""
-                  }`}
-                >
+                <li className={`js-text-animation js-fadeInUp`}>
                   Save money for your future dreams.
                 </li>
               </ul>
@@ -403,9 +297,7 @@ const Shape = () => {
           </div>
           <div className="col-12 col-md-8 col-lg-6 m-md-auto">
             <div
-              className={`shape__step-box shape__step-box--budget ${
-                isActived ? "" : "not-active"
-              }`}
+              className={`shape__step-box shape__step-box--budget not-active`}
             >
               <div className="card p-0">
                 <div className="card__head card__head-icon card__head-icon--blue card__head-icon--center">

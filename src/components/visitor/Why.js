@@ -3,26 +3,6 @@ import PropTypes from "prop-types";
 
 const Why = ({ testimonials, itemWidth }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [scrolling, setScrolling] = useState(false);
-
-  const handleScroll = () => {
-    const whyElement = document.getElementById("why");
-    if (whyElement) {
-      const rect = whyElement.getBoundingClientRect();
-      setScrolling(
-        rect.top <= window.innerHeight * 0.2 &&
-          rect.bottom >= window.innerHeight * 0.2
-      );
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   const prev = () => {
     let newIndex =
@@ -114,20 +94,14 @@ const Why = ({ testimonials, itemWidth }) => {
         <div className="container">
           <div className="row">
             <div className="col-12 text-center">
-              <h2
-                className={`js-text-animation ${
-                  scrolling ? "js-fadeInUp" : ""
-                }`}
-              >
+              <h2 className={`js-text-animation js-fadeInUp`}>
                 <b>They wrote about us</b>
               </h2>
             </div>
             <div className="col-12">
               <div className="wrote-news__wrapper">
                 <div
-                  className={`wrote-news__item js-text-animation ${
-                    scrolling ? "js-fadeInUp" : ""
-                  }`}
+                  className={`wrote-news__item js-text-animation js-fadeInUp`}
                 >
                   <svg
                     width="190"
@@ -142,9 +116,7 @@ const Why = ({ testimonials, itemWidth }) => {
                   </svg>
                 </div>
                 <div
-                  className={`wrote-news__item js-text-animation ${
-                    scrolling ? "js-fadeInUp" : ""
-                  }`}
+                  className={`wrote-news__item js-text-animation js-fadeInUp`}
                 >
                   <svg
                     width="125"
@@ -159,9 +131,7 @@ const Why = ({ testimonials, itemWidth }) => {
                   </svg>
                 </div>
                 <div
-                  className={`wrote-news__item js-text-animation ${
-                    scrolling ? "js-fadeInUp" : ""
-                  }`}
+                  className={`wrote-news__item js-text-animation js-fadeInUp`}
                 >
                   <svg
                     width="359"
@@ -177,9 +147,7 @@ const Why = ({ testimonials, itemWidth }) => {
                 </div>
 
                 <div
-                  className={`wrote-news__item js-text-animation ${
-                    scrolling ? "js-fadeInUp" : ""
-                  }`}
+                  className={`wrote-news__item js-text-animation js-fadeInUp`}
                 >
                   <svg
                     width="130"
@@ -194,9 +162,7 @@ const Why = ({ testimonials, itemWidth }) => {
                   </svg>
                 </div>
                 <div
-                  className={`wrote-news__item js-text-animation ${
-                    scrolling ? "js-fadeInUp" : ""
-                  }`}
+                  className={`wrote-news__item js-text-animation js-fadeInUp`}
                 >
                   <svg
                     width="217"

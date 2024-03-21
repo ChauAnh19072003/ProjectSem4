@@ -4878,6 +4878,9 @@ const HomepageStyles = styled.div`
     overflow: scroll;
     padding-bottom: 70px;
     }
+    .header__navigation-main{
+        backgroung-color: #4d84e2;
+    }
     .header__menu a {
     text-decoration: none;
     }
@@ -4910,8 +4913,13 @@ const HomepageStyles = styled.div`
     .header__mobile-cta {
     display: -ms-flexbox;
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     background-color: #fff;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+    .header__mobile-cta ul{
+        background-color: #5995fd;
     }
     .header__mobile-cta .button {
     display: inline-block;
@@ -4921,6 +4929,7 @@ const HomepageStyles = styled.div`
     flex: 1 1 50%;
     padding: 10px 8px;
     }
+
     .header__mobile-cta li:last-of-type {
     text-align: left;
     }
