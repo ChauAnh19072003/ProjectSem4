@@ -20,8 +20,8 @@ const Login = () => {
   const [signupSuccessMessage, setSignupSuccessMessage] = useState({});
   const [showErrors, setShowErrors] = useState({});
   const [showErrorAlert, setShowErrorAlert] = useState(false);
-  const [isCollapseOpen, setIsCollapseOpen] = useState(true);
-  const [isSuccessOpen, setIsSuccessOpen] = useState(true);
+  const [isErrorOpen, setIsErrorOpen] = useState(false);
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [isSignUpMode, setIsSignUpMode] = useState(false);
 
   const toggleMode = () => {
@@ -58,7 +58,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    await AuthService.login(username, password)
+    await AuthService.login(email, password)
       .then((response) => {
         console.log("Login successful:", response);
         history.push("/user/default");
@@ -77,9 +77,9 @@ const Login = () => {
           setShowErrors(fieldErrors);
           setShowErrorAlert(true);
         }
-        setIsCollapseOpen(true);
+        setIsErrorOpen(true);
         setTimeout(() => {
-          setIsCollapseOpen(false);
+          setIsErrorOpen(false);
         }, fadeDuration * 800);
       });
   };
@@ -132,9 +132,9 @@ const Login = () => {
         setShowErrorAlert(true);
       }
       setSignupSuccessAlert(false);
-      setIsCollapseOpen(true);
+      setIsErrorOpen(true);
       setTimeout(() => {
-        setIsCollapseOpen(false);
+        setIsErrorOpen(false);
       }, fadeDuration * 800);
     }
   };
@@ -144,12 +144,12 @@ const Login = () => {
       
       <Slide
         direction="top"
-        in={isCollapseOpen}
+        in={isErrorOpen}
         animateOpacity
         style={{ position: "fixed", zIndex: "9999" }}
       >
         {showErrorAlert && Object.keys(showErrors).length > 0 && (
-          <Box p="40px" mt="4" w="30%" margin="auto" padding="auto">
+          <Box p="40px" mt="4" w={{ base: "100%", md: "30%" }} margin="auto" padding="auto">
             {Object.entries(showErrors).map(([field, errorMessage]) => (
               <Alert key={field} status="error" mt={4}>
                 <AlertIcon />
@@ -167,7 +167,7 @@ const Login = () => {
         style={{ position: "fixed", zIndex: "9999" }}
       >
         {signupSuccessAlert && Object.keys(signupSuccessMessage).length > 0 && (
-          <Box p="40px" mt="4" w="30%" margin="auto" padding="auto">
+          <Box p="40px" mt="4" w={{ base: "100%", md: "30%" }} margin="auto" padding="auto">
             {Object.entries(signupSuccessMessage).map(
               ([field, successMessage]) => (
                 <Alert key={field} status="success" mt={4}>
@@ -234,10 +234,10 @@ const Login = () => {
                 <div className="input-field">
                   <input
                     type="text"
-                    placeholder="Username"
-                    name="username"
-                    value={username}
-                    onChange={onChangeUsername}
+                    placeholder="Email"
+                    name="email"
+                    value={email}
+                    onChange={onChangeEmail}
                   />
                 </div>
                 <div className="input-field">

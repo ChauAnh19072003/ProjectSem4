@@ -51,7 +51,7 @@ const CategoryList = () => {
   const [categoryIdToDelete, setCategoryIdToDelete] = useState(null);
   const [showErrors, setShowErrors] = useState({});
   const [showErrorAlert, setShowErrorAlert] = useState(false);
-  const [isCollapseOpen, setIsCollapseOpen] = useState(true);
+  const [isErrorOpen, setIsErrorOpen] = useState(true);
   const [categoryIdToUpdate, setCategoryIdToUpdate] = useState(null);
   const fadeDuration = 4;
   useEffect(() => {
@@ -107,10 +107,6 @@ const CategoryList = () => {
           type: newCategoryType,
         });
         setCategories([...categories, response.data]);
-        setNewCategoryName("");
-        setSelectedIcon("");
-        setNewCategoryType("EXPENSE");
-        onCreateModalClose();
       } catch (error) {
         if (
           error.response &&
@@ -124,9 +120,9 @@ const CategoryList = () => {
           setShowErrors(fieldErrors);
           setShowErrorAlert(true);
         }
-        setIsCollapseOpen(true);
+        setIsErrorOpen(true);
         setTimeout(() => {
-          setIsCollapseOpen(false);
+          setIsErrorOpen(false);
         }, fadeDuration * 800);
       }
     }
@@ -186,12 +182,21 @@ const CategoryList = () => {
     }
   };
 
+  const resetCreateModalData = () => {
+    setNewCategoryName("");
+    setSelectedIcon(iconOptions.length > 0 ? iconOptions[0] : []);
+    setNewCategoryType("EXPENSE");
+    setShowErrors({});
+    setShowErrorAlert(false);
+  };
+
+
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <Card
         direction="column"
-        w="70%"
-        px="150px"
+        w={{ base: "100%", md: "70%" }}
+        px={{ base: "10px", md: "150px"}} 
         mx="auto"
         my="auto"
         overflowX={{ sm: "scroll", lg: "hidden" }}
@@ -199,9 +204,9 @@ const CategoryList = () => {
         <Flex
           justifyContent="flex-start"
           my="20px"
-          direction={{ base: "column", md: "row" }}
+          direction={{ base: "row", md: "row" }}
         >
-          <SearchBar w="70%" borderRadius="30px" />
+          <SearchBar w="60%" marginLeft='20px' borderRadius="30px" />
           <Button
             borderRadius="30px"
             color="white"
@@ -211,7 +216,10 @@ const CategoryList = () => {
             _hover={{
               bgGradient: "linear(to-r, #2b71ad, #422AFB)",
             }}
-            onClick={onCreateModalOpen}
+            onClick={() => {
+              resetCreateModalData();
+              onCreateModalOpen();
+            }}
             mx="20px"
           >
             Add
@@ -219,12 +227,12 @@ const CategoryList = () => {
         </Flex>
         <Slide
           direction="top"
-          in={isCollapseOpen}
+          in={isErrorOpen}
           animateOpacity
           style={{ position: "fixed", zIndex: "9999" }}
         >
           {showErrorAlert && Object.keys(showErrors).length > 0 && (
-            <Box p="40px" mt="4" w="30%" margin="auto" padding="auto">
+            <Box p="40px" mt="4" w={{ base: "100%", md: "30%" }} margin="auto" padding="auto">
               {Object.entries(showErrors).map(([field, errorMessage]) => (
                 <Alert key={field} status="error" mt={4}>
                   <AlertIcon />
@@ -260,7 +268,7 @@ const CategoryList = () => {
                 <Select
                   value={newCategoryType}
                   onChange={(e) => setNewCategoryType(e.target.value)}
-                  w="30%"
+                  w={{ base: "40%", md: "40%" }}
                 >
                   <option value="EXPENSE">Expense</option>
                   <option value="INCOME">Income</option>
@@ -301,7 +309,7 @@ const CategoryList = () => {
                 <Select
                   value={newCategoryType}
                   onChange={(e) => setNewCategoryType(e.target.value)}
-                  w="30%"
+                  w={{ base: "40%", md: "40%" }}
                 >
                   <option value="EXPENSE">Expense</option>
                   <option value="INCOME">Income</option>

@@ -5,23 +5,9 @@ const Header = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
-  const [isHeaderFixed, setIsHeaderFixed] = useState(false);
-  const headerRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!headerRef.current) return;
-      setIsHeaderFixed(window.pageYOffset > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
   return (
     <NavBarContainer
       {...props}
-      ref={headerRef}
       style={{
         backgroundColor: "white",
         position: "fixed",

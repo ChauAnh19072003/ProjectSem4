@@ -8708,7 +8708,7 @@ const HomepageStyles = styled.div`
     transform: scale(0.78);
     }
     .piechart [class^="pie"] {
-    strokeWidth: 58;
+    stroke-width: 58;
     fill: none;
     transition: all 0.45s ease;
     }

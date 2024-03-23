@@ -10,10 +10,10 @@ const register = (username, email, password, confirmPassword) => {
   });
 };
 
-const login = async (username, password) => {
+const login = async (email, password) => {
   const response = await axios
     .post(API_URL + "signin", {
-      username,
+      email,
       password,
     });
   if (response.data.accessToken) {
@@ -30,11 +30,11 @@ const forgotPassword = async (email) => {
   return response.data;
 }
 
-const resetPassword = async (token, password) => {
+const resetPassword = async (token, password, confirmPassword) => {
   console.log("Token before API call:", token);
 
   const response = await axios.put(API_URL + "reset-password",
-    {token, password}
+    {token, password, confirmPassword}
   );
 
   return response.data;

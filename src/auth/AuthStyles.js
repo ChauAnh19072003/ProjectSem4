@@ -87,6 +87,7 @@ const AuthStyles = styled.div `
     font-weight: 600;
     font-size: 1.1rem;
     color: #333;
+    width: 100%;
   }
   
   .input-field input::placeholder {
