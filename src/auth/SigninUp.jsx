@@ -268,7 +268,6 @@ const Login = () => {
                   Sign up
                 </button>
               </div>
-              <img src="img/log.svg" className="image" alt="" />
             </div>
             <div className="panel right-panel">
               <div className="content">
@@ -280,7 +279,6 @@ const Login = () => {
                   Sign in
                 </button>
               </div>
-              <img src="img/register.svg" className="image" alt="" />
             </div>
           </div>
         </div>

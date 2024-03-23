@@ -26,11 +26,10 @@ const ResetPassword = () => {
   const [resetPasswordSuccessAlert, setResetPasswordSuccessAlert] =
     useState(false);
   const [resetPasswordSuccessMessage, setResetPasswordSuccessMessage] =
-    useState({});
+    useState("");
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState({});
-  const [isValidToken, setIsValidToken] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
 
   const onChangePassword = (e) => {
@@ -46,29 +45,24 @@ const ResetPassword = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
-      console.log("Calling resetPassword API");
-      const response = await AuthService.resetPassword(token, password, confirmPassword);
-      if (response && response.status === 200) {
-        if (response && response.data && typeof response.data === "object") {
-          setResetPasswordSuccessMessage(response.data);
-          setResetPasswordSuccessAlert(true);
-        } else if (
-          response &&
-          response.data &&
-          typeof response.data === "string"
-        ) {
-          const fieldSuccess = response.data.split("\n");
-          setResetPasswordSuccessMessage(fieldSuccess);
-          setResetPasswordSuccessAlert(true);
-        }
+      const response = await AuthService.resetPassword(
+        token,
+        password,
+        confirmPassword
+      );
+      console.log("Response Status:", response.status);
+      if (response && response.message) {
+        setResetPasswordSuccessAlert(true);
+        setResetPasswordSuccessMessage(response.message);
+        await axios.delete(`/api/auth/password-reset-tokens/${token}`);
       }
       setIsSuccessOpen(true);
-      // history.push("/auth/signin");
       setTimeout(() => {
         setIsSuccessOpen(false);
+        history.push("/auth/signin");
       }, fadeDuration * 1000);
-      setIsSuccessOpen(true);
     } catch (error) {
+      console.log(error.response.message);
       if (
         error.response &&
         error.response.data &&
@@ -88,24 +82,28 @@ const ResetPassword = () => {
       }, fadeDuration * 800);
     }
   };
-  // useEffect(() => {
-  //   const validateToken = async () => {
-  //     try {
-  //       await axios.get(`/api/auth/validate-token/${token}`);
-  //       setIsValidToken(true);
-  //     } catch (error) {
-  //       setIsValidToken(false);
-  //       console.error("Invalid token:", error.message);
-  //       alert("Token expiry");
-  //       history.push("/auth/signin");
-  //     }
-  //   };
+  useEffect(() => {
+    const validateToken = async () => {
+      try {
+        await axios.get(`/api/auth/validate-token/${token}`);
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          typeof error.response.data === "object"
+        ) {
+          alert(error.response.data);
+          history.push("/auth/signin");
+        } else if (error.response && typeof error.response.data === "string") {
+          const fieldErrors = error.response.data.split("\n");
+          alert(fieldErrors);
+          history.push("/auth/signin");
+        }
+      }
+    };
 
-  //   validateToken();
-  // }, [token]);
-  // if (!isValidToken) {
-  //   return <div>Token expired</div>;
-  // }
+    validateToken();
+  }, [token, history]);
   return (
     <HomepageStyles>
       <Header />
@@ -139,26 +137,21 @@ const ResetPassword = () => {
         animateOpacity
         style={{ position: "fixed", zIndex: "9999" }}
       >
-        {resetPasswordSuccessAlert &&
-          Object.keys(resetPasswordSuccessMessage).length > 0 && (
-            <Box
-              p="40px"
-              mt="4"
-              w={{ base: "100%", md: "30%" }}
-              margin="auto"
-              padding="auto"
-            >
-              {Object.entries(resetPasswordSuccessMessage).map(
-                ([field, successMessage]) => (
-                  <Alert key={field} status="success" mt={4}>
-                    <AlertIcon />
-                    <AlertTitle>Reset password successful!</AlertTitle>
-                    <AlertDescription>{successMessage}</AlertDescription>
-                  </Alert>
-                )
-              )}
-            </Box>
-          )}
+        {resetPasswordSuccessAlert && (
+          <Box
+            p="40px"
+            mt="4"
+            w={{ base: "100%", md: "30%" }}
+            margin="auto"
+            padding="auto"
+          >
+            <Alert status="success" mt={4}>
+              <AlertIcon />
+              <AlertTitle>Reset password successful!</AlertTitle>
+              <AlertDescription>{resetPasswordSuccessMessage}</AlertDescription>
+            </Alert>
+          </Box>
+        )}
       </Slide>
       <div className="visual"></div>
       <AuthStyles>

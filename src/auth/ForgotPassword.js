@@ -21,7 +21,7 @@ const ForgotPassword = () => {
   const [sendEmailSuccessMessage, setSendEmailSuccessMessage] = useState("");
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState({});
-  const [isSuccessOpen, setIsSuccessOpen] = useState(true);
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
 
   const onChangeEmail = (e) => {
@@ -34,8 +34,8 @@ const ForgotPassword = () => {
 
     try {
       const response = await AuthService.forgotPassword(email);
-      console.log("Response Message:", response.message);
-      if (response && response.status === 200) {
+      console.log("Response Status:", response.status);
+      if (response && response.message) {
         setSendEmailSuccessAlert(true);
         setSendEmailSuccessMessage(response.message);
       }
@@ -97,19 +97,19 @@ const ForgotPassword = () => {
         style={{ position: "fixed", zIndex: "9999" }}
       >
         {sendEmailSuccessAlert && (
-          <Box
-            p="40px"
-            mt="4"
-            w={{ base: "100%", md: "30%" }}
-            margin="auto"
-            padding="auto"
-          >
-            <Alert status="success" mt={4}>
-              <AlertIcon />
-              <AlertTitle>Find email successful!</AlertTitle>
-              <AlertDescription>{sendEmailSuccessMessage}</AlertDescription>
-            </Alert>
-          </Box>
+        <Box
+          p="40px"
+          mt="4"
+          w={{ base: "100%", md: "30%" }}
+          margin="auto"
+          padding="auto"
+        >
+          <Alert status="success" mt={4}>
+            <AlertIcon />
+            <AlertTitle>Success!</AlertTitle>
+            <AlertDescription>{sendEmailSuccessMessage}</AlertDescription>
+          </Alert>
+        </Box>
         )}
       </Slide>
       <div className="visual"></div>
