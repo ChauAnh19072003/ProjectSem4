@@ -233,7 +233,7 @@ const Login = () => {
                 <h2 className="title">Sign in</h2>
                 <div className="input-field">
                   <input
-                    type="text"
+                    type="email"
                     placeholder="Email"
                     name="email"
                     value={email}
